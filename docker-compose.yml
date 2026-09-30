@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: r1t-db
+    environment:
+      POSTGRES_USER: r1t
+      POSTGRES_PASSWORD: r1t_dev
+      POSTGRES_DB: r1t
+    ports:
+      - "5432:5432"
+    volumes:
+      - r1t-data:/var/lib/postgresql/data
+
+volumes:
+  r1t-data:
