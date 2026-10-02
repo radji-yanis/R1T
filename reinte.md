@@ -1,7 +1,7 @@
 1. Problématique 
 Aujourd'hui, organiser ou trouver un match de foot entre potes, c'est super compliqué : il faut envoyer des dizaines de messages, relancer tout le monde, gérer les annulations de dernière minute et essayer de faire concorder les emplois du temps. Quand on a déjà des journées bien remplies, ça prend trop d'énergie et on finit souvent par laisser tomber.
 
-Le vrai problème résolu : l'application permet de trouver ou de compléter un match en deux clics selon ses disponibilités, sans avoir besoin de passer des heures à chercher des joueurs autour de soi.
+Le vrai problème résolu : l'application permet de trouver ou de compléter un match de la manière la plus rapide qu'il soit selon ses disponibilités, sans avoir besoin de passer des heures à chercher des joueurs autour de soi.
 
 2. Cible prioritaire
 Profil : Nas, 30 ans, active avec des semaines chargées, passionnée de football mais sans équipe fixe disponible au même rythme qu'elle.
