@@ -10,6 +10,7 @@ CREATE TABLE utilisateur (
   pseudo VARCHAR(50) NOT NULL,
   ville VARCHAR(100),
   style style_jeu NOT NULL,
+  avatar_id INTEGER NOT NULL DEFAULT 1 CHECK (avatar_id BETWEEN 1 AND 30),
   date_creation TIMESTAMP NOT NULL DEFAULT now()
 );
 
