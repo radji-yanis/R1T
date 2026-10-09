@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 
-import rencontreRoutes from './routes/rencontre.js';
+import rencontreRoutes from './routes/rencontres.js';
 // import utilisateurRoutes from './routes/utilisateur.js';
 // import inscriptionRoutes from './routes/inscription.js';
 
