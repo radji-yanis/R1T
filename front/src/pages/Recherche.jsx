@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Header from "../components/Header/Header"
 import Card from "../components/Card/Card"
 import Loader from "../components/Loader/Loader"
+import SimpleMessage from "../components/SimpleMessage/SimpleMessage"
 
 export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
@@ -30,7 +31,7 @@ export default function Recherche() {
             {chargementRencontres
                 ? <Loader/>
                 : rencontres.length === 0
-                ? 'Aucune rencontre'
+                ? <SimpleMessage content="Aucune rencontre, sorry bro."/>
                 : <section className='cards'>
                     { rencontres.map(rencontre => <Card key={rencontre.id} {...rencontre}/>) }
                 </section>
