@@ -4,10 +4,13 @@ import Header from "../components/Header/Header"
 import Card from "../components/Card/Card"
 import Loader from "../components/Loader/Loader"
 import SimpleMessage from "../components/SimpleMessage/SimpleMessage"
+import BottomDrawer from "../components/BottomDrawer/BottomDrawer"
 
 export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
     const [chargementRencontres, setChargementRencontres] = useState(true);
+    // const [detailedMatchId, setDetailedMatchId] = useState(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         let url = "http://localhost:3000/api/rencontre/all";
@@ -25,9 +28,17 @@ export default function Recherche() {
         })()
     }, []);
 
+    // useEffect(() => {
+
+    // }, [detailedMatchId]);
+
     return (
         <>
             <Header titre="Recherche"/>
+            <button onClick={() => setOpen(true)}>click</button>
+            <BottomDrawer open={open} setOpen={setOpen}>
+                <h2>salut</h2>
+            </BottomDrawer>
             {chargementRencontres
                 ? <Loader/>
                 : rencontres.length === 0
