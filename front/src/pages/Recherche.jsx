@@ -4,16 +4,15 @@ import Header from "../components/Header/Header"
 import Card from "../components/Card/Card"
 import Loader from "../components/Loader/Loader"
 import SimpleMessage from "../components/SimpleMessage/SimpleMessage"
-import BottomDrawer from "../components/BottomDrawer/BottomDrawer"
+import MatchDrawer from "../components/MatchDrawer/MatchDrawer"
 
 export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
     const [chargementRencontres, setChargementRencontres] = useState(true);
-    // const [detailedMatchId, setDetailedMatchId] = useState(null);
-    const [open, setOpen] = useState(false);
+    const [detailedMatchId, setDetailedMatchId] = useState(null);
 
     useEffect(() => {
-        let url = "http://localhost:3000/api/rencontres/";
+        const url = "http://localhost:3000/api/rencontres/";
 
         (async () => {
             try {
@@ -29,22 +28,49 @@ export default function Recherche() {
     }, []);
 
     // useEffect(() => {
+    //     if(openedDrawer === true)
+    //         return;
 
+    //     setDetailedMatchId(null);
+    // }, [openedDrawer]);
+
+    // useEffect(() => {
+    //     if(detailedMatchId === null)
+    //         return;
+
+        
+    //     console.log("useEffect recherche"); 
+
+    // //     let url = `http://localhost:3000/api/rencontres/${detailedMatchId}`;
+
+    // //     (async () => {
+    // //         try {
+    // //             const response = await fetch(url)
+    // //             const data = await response.json();
+    // //             console.log(data); 
+    // //             // setRencontres(data);
+    // //         } catch (error) {
+    // //             console.log(error)
+    // //         } finally {
+    // //             setOpenedDrawer(true);
+    // //             // setChargementRencontres(false)
+    // //         }
+    // //     })()
     // }, [detailedMatchId]);
 
     return (
         <>
             <Header titre="Recherche"/>
-            <button onClick={() => setOpen(true)}>click</button>
-            <BottomDrawer open={open} setOpen={setOpen}>
+            <MatchDrawer detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
+            {/* <BottomDrawer open={openedDrawer} setOpen={setOpenedDrawer}>
                 <h2>salut</h2>
-            </BottomDrawer>
+            </BottomDrawer> */}
             {chargementRencontres
                 ? <Loader/>
                 : rencontres.length === 0
                 ? <SimpleMessage content="Aucune rencontre, sorry bro."/>
                 : <section className='cards'>
-                    { rencontres.map(rencontre => <Card key={rencontre.id} {...rencontre}/>) }
+                    { rencontres.map(rencontre => <Card key={rencontre.id} setDetailedMatchId={setDetailedMatchId} {...rencontre}/>) }
                 </section>
             }
         </>

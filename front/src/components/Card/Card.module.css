@@ -33,7 +33,7 @@
     border-radius: 5px;
     font-family: var(--font-title);
     font-size: 18px;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     line-height: 1em;
     color: var(--primary);
 }

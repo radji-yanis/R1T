@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import styles from './Card.module.css';
 
 export default function Card(props) {
-    const {id, titre, lieu, format, statut, date_heure, nb_inscrits} = props;
+    const {id, titre, lieu, format, statut, date_heure, nb_inscrits, setDetailedMatchId} = props;
 
     function formatDate(date) {
         date = new Date(date);
@@ -49,8 +49,11 @@ export default function Card(props) {
         <div className={styles.card_progress}>
             <div className={styles.card_progressBar} style={{width: progressPercent + '%', backgroundColor: statusColor}}></div>
         </div>
-        {/* { statut !== "annulee" &&
-            <Link to={`/match/${id}`} className={styles.card_link}></Link>
-        } */}
+        <a href="#" className={styles.card_link} onClick={e => {
+            e.preventDefault();
+            setDetailedMatchId(id);
+        }}></a>
     </div>;
 }
+
+// TODO : loader au click sur une carte
