@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import styles from './Card.module.css';
 
 export default function Card(props) {
-    const {id, titre, lieu, format, statut, date_heure} = props;
+    const {id, titre, lieu, format, statut, date_heure, nb_inscrits} = props;
 
     function formatDate(date) {
         date = new Date(date);
@@ -14,11 +14,19 @@ export default function Card(props) {
         return `${jour}/${mois} - ${heures}h${minutes}`;
     }
 
-    const nb_inscriptions = 7;
-    const nb_places = 10;
+    const cleanFormat = {
+        "foot5": [ "5v5", 10 ],
+        "foot7": [ "7v7", 14 ],
+        "foot11": [ "11v11", 22 ]
+    }
+    const progressPercent = nb_inscrits * 100 / cleanFormat[format][1];
 
-    const progressPercent = nb_inscriptions * 100 / nb_places;
-    let statusColor = ["complete", "annulee"].includes(statut) ? 'var(--grey)' : (progressPercent < 70 ? 'var(--green)' : 'var(--orange)');
+    let statusColor = 'var(--grey)';
+    if (progressPercent < 50) {
+        statusColor = 'var(--calm)';
+    }else if (progressPercent < 100 ) {
+        statusColor = 'var(--danger)';
+    }
     
     return <div className={styles.card} style={{ opacity: statut === "annulee" ? 0.5 : 1 }}>
         <div className={styles.card_top}>
@@ -27,15 +35,15 @@ export default function Card(props) {
                 <span className={styles.card_subTitle}>{lieu}</span>
             </div>
             <div className={styles.card_topRight}>
-                <span className={styles.card_format}>{format}</span>
+                <span className={styles.card_format}>{cleanFormat[format][0]}</span>
             </div>
         </div>
         <div className={styles.card_content}>
             <span className={styles.card_dateHeure}>{formatDate(date_heure)}</span>
-            <span className={styles.card_dateHeure}>{nb_inscriptions} / {nb_places} joueurs</span>
+            <span className={styles.card_dateHeure}>{nb_inscrits} / {cleanFormat[format][1]} joueurs</span>
         </div>
         <div className={styles.card_progress}>
-            <div className={styles.card_progressBar} style={{width: progressPercent + '%'}}></div>
+            <div className={styles.card_progressBar} style={{width: progressPercent + '%', backgroundColor: statusColor}}></div>
         </div>
         { statut !== "annulee" &&
             <Link to={`/match/${id}`} className={styles.card_link}></Link>
