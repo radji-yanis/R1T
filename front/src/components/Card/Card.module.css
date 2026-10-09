@@ -1,0 +1,61 @@
+.card {
+    padding: 25px;
+    border-radius: 12px;
+    background-color: var(--dark-grey);
+    margin-bottom: var(--space-sm);
+}
+
+.card_top {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.card_topLeft {
+    width: 80%;
+}
+
+.card_topRight {
+    width: 20%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: end;
+}
+
+.card_subTitle {
+    font-size: 18px;
+    color: var(--light-grey);
+}
+
+.card_format {
+    padding: 6px 6px;
+    border: 2px solid var(--primary);
+    border-radius: 5px;
+    font-family: var(--font-title);
+    line-height: 1em;
+    color: var(--primary);
+}
+
+.card_content {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: var(--space-xs);
+}
+
+.card_progress {
+    display: block;
+    height: 5px;
+    border-radius: 5px;
+    background: var(--grey);
+    position: relative;
+    overflow: hidden;
+}
+
+.card_progressBar {
+    position: absolute;
+    top: 0;
+    bottom: 0; 
+    left: 0;
+    background-color: var(--primary);
+}

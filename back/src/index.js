@@ -2,12 +2,26 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 
+import rencontreRoutes from './routes/rencontre.js';
+// import utilisateurRoutes from './routes/utilisateur.js';
+// import inscriptionRoutes from './routes/inscription.js';
+
 const app = express();
-app.use(cors());
+const PORT = process.env.PORT || 3000;
+
 app.use(express.json());
+app.use(cors());
 
-app.get('/api/health', (req, res) => res.json({ ok: true }));
+app.use('/api/rencontre', rencontreRoutes);
+// app.use('/api/utilisateur', utilisateurRoutes);
+// app.use('/api/inscription', inscriptionRoutes);
 
-app.listen(process.env.PORT, () =>
-  console.log(`Serveur sur http://localhost:${process.env.PORT}`)
-);
+app.use((req, res) => res.status(404).json({ erreur: "Route inconnue" }));
+app.use((err, req, res, next) => {
+  console.error("[erreur]", err.message);
+  res.status(500).json({ erreur: err.message });
+});
+
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur http://localhost:${PORT}`);
+});
