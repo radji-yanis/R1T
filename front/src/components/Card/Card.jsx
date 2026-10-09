@@ -21,12 +21,16 @@ export default function Card(props) {
     }
     const progressPercent = nb_inscrits * 100 / cleanFormat[format][1];
 
-    let statusColor = 'var(--grey)';
-    if (progressPercent < 50) {
-        statusColor = 'var(--calm)';
-    }else if (progressPercent < 100 ) {
-        statusColor = 'var(--danger)';
+    let statusColor = "var(--light-grey)";
+    if(progressPercent < 66) {
+        statusColor = "var(--calm)";
+    } else if(progressPercent < 100) {
+        statusColor = "var(--danger)";
     }
+
+    const p = Math.max(0, Math.min(100, progressPercent));
+    const hue = 240 - (p * 2.4);
+    // const statusColor =  `hsl(${hue}, 100%, 40%)`;
     
     return <div className={styles.card} style={{ opacity: statut === "annulee" ? 0.5 : 1 }}>
         <div className={styles.card_top}>
@@ -40,7 +44,7 @@ export default function Card(props) {
         </div>
         <div className={styles.card_content}>
             <span className={styles.card_dateHeure}>{formatDate(date_heure)}</span>
-            <span className={styles.card_dateHeure}>{nb_inscrits} / {cleanFormat[format][1]} joueurs</span>
+            <span className={styles.card_nbInscrits}>{nb_inscrits} / {cleanFormat[format][1]} joueurs</span>
         </div>
         <div className={styles.card_progress}>
             <div className={styles.card_progressBar} style={{width: progressPercent + '%', backgroundColor: statusColor}}></div>
