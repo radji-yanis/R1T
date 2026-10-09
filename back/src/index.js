@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 
-import rencontreRoutes from './routes/rencontre.js';
+import rencontreRoutes from './routes/rencontres.js';
 // import utilisateurRoutes from './routes/utilisateur.js';
 // import inscriptionRoutes from './routes/inscription.js';
 
@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/rencontre', rencontreRoutes);
+app.use('/api/rencontres', rencontreRoutes);
 // app.use('/api/utilisateur', utilisateurRoutes);
 // app.use('/api/inscription', inscriptionRoutes);
 

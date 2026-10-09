@@ -13,7 +13,7 @@ export default function Recherche() {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        let url = "http://localhost:3000/api/rencontre/all";
+        let url = "http://localhost:3000/api/rencontres/";
 
         (async () => {
             try {
