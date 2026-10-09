@@ -20,15 +20,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/all", async (req, res, next) => {
-  try {
-    const { rows } = await pool.query(`SELECT * FROM rencontre;`);
-    res.json(rows);
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.get("/:id", async (req, res, next) => {
   try {
     if (!Number(req.params.id)) {

@@ -10,7 +10,7 @@ export default function Recherche() {
     const [chargementRencontres, setChargementRencontres] = useState(true);
 
     useEffect(() => {
-        let url = "http://localhost:3000/api/rencontre/all";
+        let url = "http://localhost:3000/api/rencontres/";
 
         (async () => {
             try {
