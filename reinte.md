@@ -2,7 +2,7 @@
 
 Aujourd'hui, organiser ou trouver un match de foot entre potes, c'est super compliqué : il faut envoyer des dizaines de messages, relancer tout le monde, gérer les annulations de dernière minute et essayer de faire concorder les emplois du temps. Quand on a déjà des journées bien remplies, ça prend trop d'énergie et on finit souvent par laisser tomber.
 
-**Le vrai problème résolu :** l'application permet de trouver ou de compléter un match de la manière la plus rapide qu'il soit selon ses disponibilités, sans avoir besoin de passer des heures à chercher des joueurs autour de soi.
+**Le vrai problème résolu :** l'application permet de trouver ou de compléter un match de la manière la plus rapide qui soit selon ses disponibilités, sans avoir besoin de passer des heures à chercher des joueurs autour de soi.
 
 ## Cible prioritaire
 
