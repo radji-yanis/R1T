@@ -49,8 +49,8 @@ export default function Card(props) {
         <div className={styles.card_progress}>
             <div className={styles.card_progressBar} style={{width: progressPercent + '%', backgroundColor: statusColor}}></div>
         </div>
-        { statut !== "annulee" &&
+        {/* { statut !== "annulee" &&
             <Link to={`/match/${id}`} className={styles.card_link}></Link>
-        }
+        } */}
     </div>;
 }
