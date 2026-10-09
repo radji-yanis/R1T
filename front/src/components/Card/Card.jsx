@@ -1,7 +1,8 @@
+import { Link } from "react-router";
 import styles from './Card.module.css';
 
 export default function Card(props) {
-    const {titre, lieu, format, statut, date_heure} = props;
+    const {id, titre, lieu, format, statut, date_heure} = props;
 
     function formatDate(date) {
         date = new Date(date);
@@ -19,7 +20,7 @@ export default function Card(props) {
     const progressPercent = nb_inscriptions * 100 / nb_places;
     let statusColor = ["complete", "annulee"].includes(statut) ? 'var(--grey)' : (progressPercent < 70 ? 'var(--green)' : 'var(--orange)');
     
-    return <div className={styles.card} style={{ opacity: statut === "annulee" ? 0.75 : 1 }}>
+    return <div className={styles.card} style={{ opacity: statut === "annulee" ? 0.5 : 1 }}>
         <div className={styles.card_top}>
             <div className={styles.card_topLeft}>
                 <h2 className="h3">{titre}</h2>
@@ -36,5 +37,8 @@ export default function Card(props) {
         <div className={styles.card_progress}>
             <div className={styles.card_progressBar} style={{width: progressPercent + '%'}}></div>
         </div>
+        { statut !== "annulee" &&
+            <Link to={`/match/${id}`} className={styles.card_link}></Link>
+        }
     </div>;
 }

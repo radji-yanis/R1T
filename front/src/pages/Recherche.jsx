@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import Header from "../components/Header/Header"
 import Card from "../components/Card/Card"
+import Loader from "../components/Loader/Loader"
 
 export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
@@ -27,7 +28,7 @@ export default function Recherche() {
         <>
             <Header titre="Recherche"/>
             {chargementRencontres
-                ? 'Chargement...'
+                ? <Loader/>
                 : rencontres.length === 0
                 ? 'Aucune rencontre'
                 : <section className='cards'>

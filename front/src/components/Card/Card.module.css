@@ -1,4 +1,5 @@
 .card {
+    position: relative;
     padding: 25px;
     border-radius: 12px;
     background-color: var(--dark-grey);
@@ -58,4 +59,9 @@
     bottom: 0; 
     left: 0;
     background-color: var(--primary);
+}
+
+.card_link {
+    position: absolute;
+    inset: 0;
 }
