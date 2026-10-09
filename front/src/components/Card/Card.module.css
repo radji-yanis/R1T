@@ -32,6 +32,8 @@
     border: 2px solid var(--primary);
     border-radius: 5px;
     font-family: var(--font-title);
+    font-size: 18px;
+    letter-spacing: 0.5px;
     line-height: 1em;
     color: var(--primary);
 }
