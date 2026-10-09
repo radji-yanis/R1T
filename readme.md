@@ -39,7 +39,11 @@ Ouvre `back/.env` et remplis les valeurs (réservées au développement local, l
 
 ```
 PORT=3000
-DATABASE_URL=postgresql://r1t:r1t_dev@localhost:5432/r1t
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=r1t
+DB_PASSWORD=r1t_dev
+DB_NAME=r1t
 JWT_SECRET=change_me
 ```
 
