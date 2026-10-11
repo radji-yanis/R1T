@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react'
 
 import BottomDrawer from "../BottomDrawer/BottomDrawer";
 import DetailsMatch from "../../popups/DetailsMatchs/DetailsMatch";
+import Button from "../Button/Button";
 
 export default function MatchDrawer(props) {
-    const { detailedMatchId, setDetailedMatchId } = props;
+    const { openedDrawer, setOpenedDrawer, detailedMatchId, setDetailedMatchId } = props;
 
     const [details, setDetails] = useState([]);
-    const [open, setOpen] = useState(false);
+
+    const stickyFooter = (
+        <Button onClick={() => alert(`inscription au match ${detailedMatchId}`)}>Inscription</Button>
+    )
 
     useEffect(() => {
         if(detailedMatchId === null)
@@ -24,13 +28,18 @@ export default function MatchDrawer(props) {
             } catch (error) {
                 console.log(error)
             } finally {
-                setOpen(true);
-                setDetailedMatchId(null);
+                setOpenedDrawer(true);
+                // setDetailedMatchId(null);
             }
         })()
     }, [detailedMatchId]);
 
-    return <BottomDrawer open={open} setOpen={setOpen}>
+    useEffect(() => {
+        if(!openedDrawer && detailedMatchId !== null)
+            setDetailedMatchId(null);
+    }, [openedDrawer]);
+ 
+    return <BottomDrawer open={openedDrawer} setOpen={setOpenedDrawer} stickyFooter={stickyFooter}>
         <DetailsMatch {...details}/>
     </BottomDrawer>
 }

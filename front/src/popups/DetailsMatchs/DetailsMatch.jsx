@@ -14,9 +14,9 @@ export default function DetailsMatch(props) {
     }
 
     const cleanFormat = {
-        "foot5": [ "5v5", 10 ],
-        "foot7": [ "7v7", 14 ],
-        "foot11": [ "11v11", 22 ]
+        "foot5": [ <>5<span className={styles.card_versus}>v</span>5</>, 10 ],
+        "foot7": [ <>7<span className={styles.card_versus}>v</span>7</>, 14 ],
+        "foot11": [ <>11<span className={styles.card_versus}>v</span>11</>, 22 ]
     }
 
     return (

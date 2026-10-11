@@ -1,8 +1,9 @@
-import { Link } from "react-router";
+import Loader from "../Loader/Loader"
+
 import styles from './Card.module.css';
 
 export default function Card(props) {
-    const {id, titre, lieu, format, statut, date_heure, nb_inscrits, setDetailedMatchId} = props;
+    const { openedDrawer, detailedMatchId, setDetailedMatchId, id, titre, lieu, format, statut, date_heure, nb_inscrits } = props;
 
     function formatDate(date) {
         date = new Date(date);
@@ -15,9 +16,9 @@ export default function Card(props) {
     }
 
     const cleanFormat = {
-        "foot5": [ "5v5", 10 ],
-        "foot7": [ "7v7", 14 ],
-        "foot11": [ "11v11", 22 ]
+        "foot5": [ <>5<span className={styles.card_versus}>v</span>5</>, 10 ],
+        "foot7": [ <>7<span className={styles.card_versus}>v</span>7</>, 14 ],
+        "foot11": [ <>11<span className={styles.card_versus}>v</span>11</>, 22 ]
     }
     const progressPercent = nb_inscrits * 100 / cleanFormat[format][1];
 
@@ -49,11 +50,16 @@ export default function Card(props) {
         <div className={styles.card_progress}>
             <div className={styles.card_progressBar} style={{width: progressPercent + '%', backgroundColor: statusColor}}></div>
         </div>
-        <a href="#" className={styles.card_link} onClick={e => {
-            e.preventDefault();
-            setDetailedMatchId(id);
-        }}></a>
+        { id === detailedMatchId && !openedDrawer &&
+            <div className={styles.card_loader}>
+                <Loader/>
+            </div>
+        }
+        { !openedDrawer &&
+            <a href="#" className={styles.card_link} onClick={e => {
+                e.preventDefault();
+                setDetailedMatchId(id);
+            }}></a>
+        }
     </div>;
 }
-
-// TODO : loader au click sur une carte

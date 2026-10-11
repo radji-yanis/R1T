@@ -10,6 +10,7 @@ export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
     const [chargementRencontres, setChargementRencontres] = useState(true);
     const [detailedMatchId, setDetailedMatchId] = useState(null);
+    const [openedDrawer, setOpenedDrawer] = useState(false);
 
     useEffect(() => {
         const url = "http://localhost:3000/api/rencontres/";
@@ -27,50 +28,17 @@ export default function Recherche() {
         })()
     }, []);
 
-    // useEffect(() => {
-    //     if(openedDrawer === true)
-    //         return;
-
-    //     setDetailedMatchId(null);
-    // }, [openedDrawer]);
-
-    // useEffect(() => {
-    //     if(detailedMatchId === null)
-    //         return;
-
-        
-    //     console.log("useEffect recherche"); 
-
-    // //     let url = `http://localhost:3000/api/rencontres/${detailedMatchId}`;
-
-    // //     (async () => {
-    // //         try {
-    // //             const response = await fetch(url)
-    // //             const data = await response.json();
-    // //             console.log(data); 
-    // //             // setRencontres(data);
-    // //         } catch (error) {
-    // //             console.log(error)
-    // //         } finally {
-    // //             setOpenedDrawer(true);
-    // //             // setChargementRencontres(false)
-    // //         }
-    // //     })()
-    // }, [detailedMatchId]);
-
     return (
         <>
             <Header titre="Recherche"/>
-            <MatchDrawer detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
-            {/* <BottomDrawer open={openedDrawer} setOpen={setOpenedDrawer}>
-                <h2>salut</h2>
-            </BottomDrawer> */}
+            <MatchDrawer openedDrawer={openedDrawer} setOpenedDrawer={setOpenedDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
+
             {chargementRencontres
                 ? <Loader/>
                 : rencontres.length === 0
                 ? <SimpleMessage content="Aucune rencontre, sorry bro."/>
                 : <section className='cards'>
-                    { rencontres.map(rencontre => <Card key={rencontre.id} setDetailedMatchId={setDetailedMatchId} {...rencontre}/>) }
+                    { rencontres.map(rencontre => <Card key={rencontre.id} openedDrawer={openedDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId} {...rencontre}/>) }
                 </section>
             }
         </>
