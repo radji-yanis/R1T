@@ -1,3 +1,8 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
 import styles from "./DetailsMatch.module.css";
 
 export default function DetailsMatch(props) {
@@ -35,8 +40,28 @@ export default function DetailsMatch(props) {
                 <p>{description}</p>
             </div>
             <h3 className="h3">Inscrits ({nb_inscrits}/{cleanFormat[format][1]})</h3>
-            <div>
-                { inscrits.map(inscrit => <span key={inscrit.id}>{inscrit.pseudo}</span>) }
+            <div className={styles.subscribed} data-base-ui-swipe-ignore style={{ touchAction: 'pan-y' }}>
+                <Swiper
+                    className={styles.subscribed_swiper}
+                    modules={[FreeMode]}
+                    freeMode={{
+                        enabled: true,
+                        momentum: true,
+                        momentumBounce: true,
+                        momentumBounceRatio: 1.5
+                    }}
+                    spaceBetween={10}
+                    slidesPerView={'auto'}
+                    >    
+                    { inscrits.map(inscrit => 
+                        <SwiperSlide key={inscrit.id} className={styles.subscribed_card}>
+                            <div className={styles.subscribed_avatar}>
+                                {inscrit.avatar_id}
+                            </div>
+                            <span className={styles.subscribed_pseudo}>{inscrit.pseudo}</span>
+                        </SwiperSlide>
+                    )}
+                </Swiper>
             </div>
         </div>
     );
