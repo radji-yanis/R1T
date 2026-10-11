@@ -39,3 +39,41 @@
 .details_description {
     margin-bottom: var(--space-md);
 }
+
+.subscribed {
+    width: calc(100% + 3rem);
+    margin-left: -1.5rem;
+}
+
+.subscribed_swiper {
+    padding: 0 1.5rem;
+}
+
+.subscribed_card {
+    width: 100px;
+    height: 130px;
+    background: var(--dark-grey);
+    border-radius: 15px;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.subscribed_avatar {
+    width: 70px;
+    height: 70px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    color: #fff;
+    font-size: 20px;
+}
+
+.subscribed_pseudo {
+    color: var(--light-grey);
+}

@@ -41,7 +41,8 @@
   width: 100%;
   max-height: calc(100% - 1rem + var(--bleed));
   margin-bottom: calc(-1 * var(--bleed));
-  padding: 1rem 1.5rem;
+  /* padding: 1rem 1.5rem; */
+  padding: 1rem 0;
   padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom, 0px) + var(--bleed));
   border-top: 1px solid var(--grey);
   background-color:  var(--background);
@@ -78,8 +79,7 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   touch-action: auto;
-  padding-top: var(--space-md);
-  padding-bottom: var(--space-md);
+  padding: var(--space-md) 1.5rem;
 }
 
 .Handle {
@@ -108,6 +108,7 @@
   bottom: 0;
   left: 0;
   z-index: 1;
+  padding: 0 1.5rem;
   transition-duration: 260ms;
   transition-property: bottom, padding-bottom;
   transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
