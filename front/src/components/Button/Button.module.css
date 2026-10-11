@@ -1,0 +1,10 @@
+.button {
+    height: 60px;
+    font-family: var(--font-title);
+    font-size: 36px;
+    color: var(--background);
+    background: var(--primary);
+    width: 100%;
+    border-radius: 12px;
+    padding-top: 4px;
+}

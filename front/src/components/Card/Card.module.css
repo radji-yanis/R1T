@@ -4,6 +4,7 @@
     border-radius: 12px;
     background-color: var(--dark-grey);
     margin-bottom: var(--space-sm);
+    overflow: hidden;
 }
 
 .card_top {
@@ -33,9 +34,13 @@
     border-radius: 5px;
     font-family: var(--font-title);
     font-size: 18px;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     line-height: 1em;
     color: var(--primary);
+}
+
+.card_versus {
+    font-size: 0.85em;
 }
 
 .card_content {
@@ -66,4 +71,19 @@
 .card_link {
     position: absolute;
     inset: 0;
+}
+
+.card_loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(from var(--dark-grey) r g b / 50%);
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

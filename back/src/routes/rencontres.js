@@ -27,9 +27,12 @@ router.get("/:id", async (req, res, next) => {
     }
 
     const { rows } = await pool.query(
-      `SELECT id, titre, description, lieu, date_heure, format, statut
-       FROM rencontre
-       WHERE id = $1`,
+      `SELECT rencontre.id, rencontre.titre, rencontre.description, rencontre.lieu, rencontre.date_heure, rencontre.format, rencontre.statut, 
+        COUNT(inscription.utilisateur_id) AS nb_inscrits
+        FROM rencontre
+        LEFT JOIN inscription ON rencontre.id = inscription.rencontre_id
+        WHERE rencontre.id = $1
+        GROUP BY rencontre.id`,
       [req.params.id],
     );
 
@@ -38,7 +41,7 @@ router.get("/:id", async (req, res, next) => {
     }
 
     const { rows: inscrits } = await pool.query(
-      `SELECT utilisateur.pseudo, utilisateur.avatar_id
+      `SELECT utilisateur.id, utilisateur.pseudo, utilisateur.avatar_id
        FROM inscription
        JOIN utilisateur ON utilisateur.id = inscription.utilisateur_id
        WHERE inscription.rencontre_id = $1
