@@ -5,15 +5,35 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const { rows } = await pool.query(`
+    const { dateDebut, dateFin, format } = req.query;
+    let query = `
       SELECT 
         rencontre.*, 
         COUNT(inscription.utilisateur_id) AS nb_inscrits
       FROM rencontre
       LEFT JOIN inscription ON rencontre.id = inscription.rencontre_id
       WHERE rencontre.statut != 'annulee'
-      GROUP BY rencontre.id
-    `);
+    `;
+    const params = [];
+
+    if (dateDebut) {
+      params.push(dateDebut);
+      query += ` AND rencontre.date_heure >= $${params.length}::date`;
+    }
+    if (dateFin) {
+      params.push(dateFin);
+      query += ` AND rencontre.date_heure < ($${params.length}::date + INTERVAL '1 day')`;
+    }
+
+    if (format) {
+      params.push(format);
+      query += ` AND rencontre.format = $${params.length}`;
+    }
+
+    query += ` GROUP BY rencontre.id`;
+
+    const { rows } = await pool.query(query, params);
+
     res.json(rows);
   } catch (err) {
     next(err);
