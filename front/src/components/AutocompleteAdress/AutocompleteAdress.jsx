@@ -80,7 +80,7 @@ export default function AutocompleteAdress() {
             itemToStringValue={(item) => `${item.properties.city} - ${item.properties.postcode}`}
             filter={null}
         >
-            <Autocomplete.Input placeholder="e.g. Pulp Fiction or 1994" className={styles.Input} />
+            <Autocomplete.Input placeholder="ex: Montreuil - 93100" className={styles.Input} />
 
             <Autocomplete.Portal hidden={!status}>
                 <Autocomplete.Positioner className={styles.Positioner} sideOffset={4} align="start">
@@ -92,10 +92,9 @@ export default function AutocompleteAdress() {
                     <Autocomplete.List>
                         {feature => (
                         <Autocomplete.Item key={feature.properties.id} className={styles.Item} value={feature}>
-                            <span className={styles.MovieItem}>
-                                <span className={styles.MovieName}>{feature.properties.city}</span>
-                                <span className={styles.MovieYear}>{feature.properties.postcode}</span>
-                            </span>
+                            <div className={styles.AdressItem}>
+                                <span className={styles.AdressCity}>{feature.properties.city} <span className={styles.AdressCode}>- {feature.properties.postcode}</span></span>
+                            </div>
                         </Autocomplete.Item>
                         )}
                     </Autocomplete.List>
