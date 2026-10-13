@@ -75,4 +75,21 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.post("/create", async (req, res, next) => {
+  try {
+    const { titre, lieu, format, date_heure, description, organisateur_id,latitude, longitude } = req.body;
+
+    const { rows } = await pool.query(
+      `INSERT INTO rencontre (titre, lieu, format, date_heure, description, organisateur_id,latitude, longitude)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+       RETURNING *`,
+      [titre, lieu, format, date_heure, description,organisateur_id,latitude, longitude]
+    );
+
+    res.status(201).json(rows[0]);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default router;
