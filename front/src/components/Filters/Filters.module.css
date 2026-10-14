@@ -1,10 +1,10 @@
-.filtres {
+.filter {
   display: flex;
   gap: var(--space-sm);
   width: 100%;
 }
 
-.filtres select {
+.filter select {
   flex: 1;
   min-width: 0;
   padding: 12px;
@@ -17,7 +17,7 @@
   font-size: 16px;
 }
 
-.filtres select:focus-visible {
+.filter select:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }

@@ -1,25 +1,25 @@
 import { useState } from "react";
-import styles from "./Filtres.module.css";
+import styles from "./Filters.module.css";
 
-export default function Filtres({ onFilter }) {
-  const [periode, setPeriode] = useState("semaine");
+export default function Filters({ onFilter }) {
+  const [period, setPeriod] = useState("semaine");
   const [format, setFormat] = useState("");
 
-  function handlePeriodeChange(e) {
-    const valeur = e.target.value;
-    setPeriode(valeur);
-    onFilter?.({ periode: valeur, format });
+  function handlePeriodChange(e) {
+    const value = e.target.value;
+    setPeriod(value);
+    onFilter?.({ periode: value, format });
   }
 
   function handleFormatChange(e) {
-    const valeur = e.target.value;
-    setFormat(valeur);
-    onFilter?.({ periode, format: valeur });
+    const value = e.target.value;
+    setFormat(value);
+    onFilter?.({ periode: period, format: value });
   }
 
   return (
-    <div className={styles.filtres}>
-      <select value={periode} onChange={handlePeriodeChange}>
+    <div className={styles.filter}>
+      <select value={period} onChange={handlePeriodChange}>
         <option value="">Toutes les dates</option>
         <option value="jour">Aujourd'hui</option>
         <option value="semaine">Cette semaine</option>
