@@ -1,4 +1,4 @@
-import { useState, useTransition, useRef } from 'react'
+import { useState, useTransition, useRef, useEffect } from 'react'
 import { Autocomplete } from '@base-ui/react/autocomplete';
 import debounce from 'debounce';
 
@@ -7,10 +7,12 @@ import styles from "./AutocompleteAdress.module.css"
 const API_URL = 'https://data.geopf.fr/geocodage/search/';
 const DEBOUNCE = 500;
 
-const executerRecherche = debounce((valeur, startTransition, setSearchResults, abortControllerRef) => {
+const executerRecherche = debounce((valeur, startTransition, setSearchResults, abortControllerRef, setIsTyping) => {
     abortControllerRef.current?.abort();
     const controller = new AbortController();
     abortControllerRef.current = controller;
+
+    setIsTyping(false);
 
     startTransition(async () => {
         try {
@@ -21,52 +23,64 @@ const executerRecherche = debounce((valeur, startTransition, setSearchResults, a
             setSearchResults(data.features || []); 
         } catch (err) {
             if (err.name === 'AbortError') {
-                console.error(`Requête annulée pour : ${valeur}`);
+                // console.error(`Requête annulée pour : "${valeur}"`);
             } else {
-                console.error("Erreur: ", err);
+                console.error(err.message);
             }
         }
     });
 }, DEBOUNCE); 
 
-export default function AutocompleteAdress() {
+export default function AutocompleteAdress(props) {
+    const { cityValue, setCityValue } = props;
+
     const [searchValue, setSearchValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const [error, setError] = useState(null);
+    const [disabledInput, setDisabledInput] = useState(false);
+    const [isTyping, setIsTyping] = useState([]);
+    // const [error, setError] = useState(null);
     
     const [isPending, startTransition] = useTransition();
 
     const abortControllerRef = useRef(null);
 
-    function getStatus() {
-        if (isPending) {
-            return (
-                <>
-                    <span className={styles.Spinner} aria-hidden />
-                    Recherche…
-                </>
-            );
-        }
-
-        if (searchValue < 3) {
+    const getStatus = () => {
+        if (searchValue.length < 3) {
             return null;
         }
-
-        if (searchResults.length === 0) {
+        if (isPending || isTyping) {
+            return <><span className={styles.Spinner} aria-hidden /> Recherche…</>
+        }
+        if (searchResults.length === 0 && !isTyping) {
+            // TODO : virer le msg quand on vient de commencer à taper
             return `Aucun résultat pour "${searchValue}"`;
         }
-
-        return `${searchResults.length} resultat${searchResults.length === 1 ? '' : 's'} trouvé${searchResults.length === 1 ? '' : 's'}`;
-    }
+        if (searchResults.length > 0) {
+            return `${searchResults.length} resultat${searchResults.length === 1 ? '' : 's'} trouvé${searchResults.length === 1 ? '' : 's'}`;
+        }
+    };
     const status = getStatus();
+
+    const onMaskClick = () => {
+        setDisabledInput(false)
+        setSearchValue('');
+        setCityValue([]);
+    };
+
+    useEffect(() => {
+        if(cityValue.length > 0) {
+            setDisabledInput(true);
+            setSearchValue(cityValue[0]);
+        }
+    }, []);
 
     return (
         <Autocomplete.Root
             items={searchResults}
             value={searchValue}
             onValueChange={(nextValue) => {
-                setSearchValue(nextValue); 
-                console.log(searchResults.length);
+                setIsTyping(true);
+                setSearchValue(nextValue);
 
                 if (nextValue.length < 3) {
                     executerRecherche.clear(); 
@@ -75,12 +89,27 @@ export default function AutocompleteAdress() {
                     return;
                 }
 
-                executerRecherche(nextValue, startTransition, setSearchResults, abortControllerRef);
+                executerRecherche(nextValue, startTransition, setSearchResults, abortControllerRef, setIsTyping);
             }}
-            itemToStringValue={(item) => `${item.properties.city} - ${item.properties.postcode}`}
+            itemToStringValue={(item) => {
+                setDisabledInput(true);
+                setCityValue([
+                    `${item.properties.city} - ${item.properties.postcode}`,
+                    item.properties.x,
+                    item.properties.y
+                ]);
+                return `${item.properties.city} - ${item.properties.postcode}`;
+            }}
             filter={null}
+            disabled={disabledInput}
         >
-            <Autocomplete.Input placeholder="ex: Montreuil - 93100" className={styles.Input} />
+            <div className={styles.inputContainer}>
+                <Autocomplete.Input placeholder="ex: Montreuil - 93100" className={styles.Input} />
+                {/* {cityValue} */}
+                {disabledInput &&
+                    <div className={styles.inputMask} onClick={onMaskClick}></div>
+                }
+            </div>
 
             <Autocomplete.Portal hidden={!status}>
                 <Autocomplete.Positioner className={styles.Positioner} sideOffset={4} align="start">

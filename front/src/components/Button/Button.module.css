@@ -8,3 +8,8 @@
     border-radius: 12px;
     padding-top: 4px;
 }
+
+.button[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+}

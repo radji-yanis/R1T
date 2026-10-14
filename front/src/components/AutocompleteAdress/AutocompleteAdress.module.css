@@ -1,3 +1,7 @@
+.inputContainer {
+    position: relative;
+}
+
 .Input {
     box-sizing: border-box;
     padding: 0 var(--space-sm);
@@ -17,6 +21,31 @@
     }
 }
 
+.inputMask {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+        to right, 
+        color-mix(in srgb, var(--dark-grey) 0%, transparent) 80%, var(--dark-grey) 90%
+    );
+    border-radius: 12px;
+}
+
+.inputMask::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    width: 22px;
+    height: 22px;
+    transform: translateY(-50%);
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nbm9uZSc+PGxpbmUgeDE9JzE4JyB5MT0nNicgeDI9JzYnIHkyPScxOCcgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPScyJyBzdHJva2UtbGluZWNhcD0ncm91bmQnLz48bGluZSB4MT0nNicgeTE9JzYnIHgyPScxOCcgeTI9JzE4JyBzdHJva2U9J3doaXRlJyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1saW5lY2FwPSdyb3VuZScvPjwvc3ZnPg==");
+    background-repeat: no-repeat;
+    background-size: 75%;
+    background-position: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+}
 
 .Positioner {
   outline: 0;
@@ -52,13 +81,11 @@
     font-size: 18px;
     line-height: 1rem;
 
-    /* &[data-highlighted] {
-        z-index: 0;
-        position: relative;
-        color: white;
+    &[data-highlighted] {
+        background: var(--grey);
     }
 
-    &[data-highlighted]::before {
+    /* &[data-highlighted]::before {
         content: '';
         z-index: -1;
         position: absolute;
@@ -112,7 +139,7 @@
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 50%;
-  border: 1px solid currentColor;
+  border: 2px solid currentColor;
   border-right-color: transparent;
   animation: autocompleteSpinner 0.75s linear infinite;
 }
