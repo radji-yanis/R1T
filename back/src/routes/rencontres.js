@@ -6,12 +6,48 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const { dateDebut, dateFin, format } = req.query;
+    const validFormats = ["foot5", "foot7", "foot11"];
+
+    if (format && !validFormats.includes(format)) {
+      return res.status(400).json({
+        error: "Invalid match format",
+      });
+    }
+
+    const isValidDate = (date) => {
+      if (typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+        return false;
+      }
+
+      const parsedDate = new Date(`${date}T00:00:00Z`);
+      return (
+        !Number.isNaN(parsedDate.getTime()) &&
+        parsedDate.toISOString().slice(0, 10) === date
+      );
+    };
+
+    if (
+      (dateDebut && !isValidDate(dateDebut)) ||
+      (dateFin && !isValidDate(dateFin))
+    ) {
+      return res.status(400).json({
+        error: "Invalid date format",
+      });
+    }
+
     let query = `
       SELECT 
         rencontre.*, 
-        COUNT(inscription.utilisateur_id) AS nb_inscrits
+        COALESCE(inscrits.nb_inscrits, 0) AS nb_inscrits
       FROM rencontre
-      LEFT JOIN inscription ON rencontre.id = inscription.rencontre_id
+      LEFT JOIN (
+        SELECT
+          rencontre_id,
+          COUNT(*) AS nb_inscrits
+        FROM inscription
+        GROUP BY rencontre_id
+      ) AS inscrits
+        ON rencontre.id = inscrits.rencontre_id
       WHERE rencontre.statut != 'annulee'
     `;
     const params = [];
@@ -30,8 +66,6 @@ router.get("/", async (req, res, next) => {
       query += ` AND rencontre.format = $${params.length}`;
     }
 
-    query += ` GROUP BY rencontre.id`;
-
     const { rows } = await pool.query(query, params);
 
     res.json(rows);
@@ -42,8 +76,10 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    if (!Number(req.params.id)) {
-      return res.status(400).json({ error: "Invalid match id" });
+    const matchId = Number(req.params.id);
+
+    if (!Number.isSafeInteger(matchId) || matchId <= 0) {
+      return res.status(400).json({ error: "Invalid match ID" });
     }
 
     const { rows } = await pool.query(
