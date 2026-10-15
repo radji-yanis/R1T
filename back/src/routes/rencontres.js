@@ -75,6 +75,55 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.post("/create", async (req, res, next) => {
+  try {
+    const { titre, lieu, format, date_heure, description, organisateur_id, latitude, longitude } = req.body;
+
+    const lat = Number(latitude);
+    const lng = Number(longitude);
+    const validFormats = ["foot5", "foot7", "foot11"];
+
+    if (!titre || titre.trim().length < 3) {
+      return res.status(400).json({ error: "Title is required and must be at least 3 characters long." });
+    }
+
+    if (!lieu || !lieu.trim()) {
+      return res.status(400).json({ error: "Location is required." });
+    }
+
+    if (!format || !validFormats.includes(format)) {
+      return res.status(400).json({ error: "Invalid format. Accepted values: 5v5, 7v7, 11v11." });
+    }
+
+    if (!date_heure || Number.isNaN(Date.parse(date_heure))) {
+      return res.status(400).json({ error: "Invalid date or time." });
+    }
+
+    if (!organisateur_id || !Number.isInteger(Number(organisateur_id))) {
+      return res.status(400).json({ error: "Organizer ID must be a valid integer." });
+    }
+
+    if (!latitude || Number.isNaN(lat) || lat < -90 || lat > 90) {
+      return res.status(400).json({ error: "Invalid latitude. Must be between -90 and 90." });
+    }
+
+    if (!longitude || Number.isNaN(lng) || lng < -180 || lng > 180) {
+      return res.status(400).json({ error: "Invalid longitude. Must be between -180 and 180." });
+    }
+
+    const { rows } = await pool.query(
+      `INSERT INTO rencontre (titre, lieu, format, date_heure, description, organisateur_id, latitude, longitude)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+       RETURNING *`,
+      [titre.trim(), lieu.trim(), format, date_heure, description || null, organisateur_id, lat, lng]
+    );
+
+    res.status(201).json(rows[0]);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.put("/:id/cancel", async (req, res, next) => {
   try {
     const { id } = req.params;
