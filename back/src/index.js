@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 
 import rencontreRoutes from './routes/rencontres.js';
-// import utilisateurRoutes from './routes/utilisateur.js';
+import utilisateurRoutes from './routes/utilisateur.js';
 import inscriptionRoutes from './routes/inscription.js';
 
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/rencontres', rencontreRoutes);
-// app.use('/api/utilisateur', utilisateurRoutes);
+app.use('/api/utilisateur', utilisateurRoutes);
 app.use('/api/inscription', inscriptionRoutes);
 
 app.use((req, res) => res.status(404).json({ erreur: "Route inconnue" }));
