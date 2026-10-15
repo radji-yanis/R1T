@@ -124,4 +124,31 @@ router.post("/create", async (req, res, next) => {
   }
 });
 
+router.put("/:id/cancel", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+      if (!Number(id)) {
+      return res.status(400).json({ error: "Invalid match id" });
+    }
+
+    const { rows, rowCount } = await pool.query(
+      `UPDATE rencontre 
+       SET statut = 'annulee' 
+       WHERE id = $1 AND statut != 'annulee'
+       RETURNING *`,
+      [id]
+    );
+
+    if (rowCount === 0) {
+      return res.status(404).json({ error: "Match not found or already cancelled" });
+    }
+
+    res.json({ message: "Match cancelled successfully", match: rows[0] });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 export default router;
