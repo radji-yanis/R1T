@@ -75,7 +75,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.put("/:id/annuler", async (req, res, next) => {
+router.put("/:id/cancel", async (req, res, next) => {
   try {
     const { id } = req.params;
 
