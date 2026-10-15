@@ -1,17 +1,28 @@
-import { useState, useEffect } from 'react'
-
 import BottomDrawer from "../BottomDrawer/BottomDrawer";
-import Geolocation from "../../popups/Geolocation/Geolocation";
+import AutocompleteAdress from "../../components/AutocompleteAdress/AutocompleteAdress";
+import GeolocationSlider from "../../components/GeolocationSlider/GeolocationSlider";
 import Button from "../Button/Button";
 
-export default function GeolocationDrawer(props) {
-    const { cityValue, setCityValue, radiusValue, setRadiusValue, openedGeolocationDrawer, setOpenedGeolocationDrawer } = props;
+import styles from "./GeolocationDrawer.module.css";
+
+export default function GeolocationDrawer({ cityValue, setCityValue, radiusValue, setRadiusValue, openedGeolocationDrawer, setOpenedGeolocationDrawer }) {
 
     const stickyFooter = (
-        <Button  disabled={cityValue.length === 0} onClick={() => alert(`Appliquer`)}>Appliquer</Button>
+        <Button disabled={cityValue.length === 0} onClick={() => alert(`Appliquer`)}>Appliquer</Button>
     )
  
-    return <BottomDrawer open={openedGeolocationDrawer} setOpen={setOpenedGeolocationDrawer} stickyFooter={stickyFooter}>
-        <Geolocation cityValue={cityValue} setCityValue={setCityValue} setRadiusValue={setRadiusValue}  radiusValue={radiusValue}/>
-    </BottomDrawer>
+    return (
+        <BottomDrawer open={openedGeolocationDrawer} setOpen={setOpenedGeolocationDrawer} stickyFooter={stickyFooter}>
+            <div className={styles.form}>
+                <label className={styles.label}>
+                    Adresse
+                    <AutocompleteAdress cityValue={cityValue} setCityValue={setCityValue} />
+                </label>
+                <label className={styles.label}  data-base-ui-swipe-ignore style={{ touchAction: 'pan-y', position: 'relative' }}>
+                    Dans un rayon de
+                    <GeolocationSlider radiusValue={radiusValue} setRadiusValue={setRadiusValue} />
+                </label>
+            </div>
+        </BottomDrawer>
+    );
 }

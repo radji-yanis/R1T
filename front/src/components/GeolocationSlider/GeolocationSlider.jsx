@@ -1,12 +1,8 @@
-import { useEffect } from 'react'
-
 import { Slider } from '@base-ui/react/slider';
 
 import styles from "./GeolocationSlider.module.css"
 
-export default function GeolocationSlider(props) {
-    const { radiusValue, setRadiusValue } = props;
-
+export default function GeolocationSlider({ radiusValue, setRadiusValue }) {
     return (
         <Slider.Root 
             value={radiusValue}

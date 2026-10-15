@@ -23,7 +23,7 @@ const executerRecherche = debounce((valeur, startTransition, setSearchResults, a
             setSearchResults(data.features || []); 
         } catch (err) {
             if (err.name === 'AbortError') {
-                // console.error(`Requête annulée pour : "${valeur}"`);
+                console.error(`Requête annulée pour : "${valeur}"`);
             } else {
                 console.error(err.message);
             }
@@ -31,14 +31,12 @@ const executerRecherche = debounce((valeur, startTransition, setSearchResults, a
     });
 }, DEBOUNCE); 
 
-export default function AutocompleteAdress(props) {
-    const { cityValue, setCityValue } = props;
+export default function AutocompleteAdress({ cityValue, setCityValue }) {
 
     const [searchValue, setSearchValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [disabledInput, setDisabledInput] = useState(false);
     const [isTyping, setIsTyping] = useState([]);
-    // const [error, setError] = useState(null);
     
     const [isPending, startTransition] = useTransition();
 
@@ -52,7 +50,6 @@ export default function AutocompleteAdress(props) {
             return <><span className={styles.Spinner} aria-hidden /> Recherche…</>
         }
         if (searchResults.length === 0 && !isTyping) {
-            // TODO : virer le msg quand on vient de commencer à taper
             return `Aucun résultat pour "${searchValue}"`;
         }
         if (searchResults.length > 0) {
@@ -105,7 +102,6 @@ export default function AutocompleteAdress(props) {
         >
             <div className={styles.inputContainer}>
                 <Autocomplete.Input placeholder="ex: Montreuil - 93100" className={styles.Input} />
-                {/* {cityValue} */}
                 {disabledInput &&
                     <div className={styles.inputMask} onClick={onMaskClick}></div>
                 }
