@@ -1,86 +1,53 @@
-# R1T
+# ⚽ R1T — Le foot simple, rapide et efficace
 
-Application web pour organiser et rejoindre des matchs de foot : un joueur trouve une rencontre près de chez lui et s'y inscrit, un organisateur crée ses matchs et suit les inscrits.
+> **R1T** (Round 1 Team) est une plateforme mobile-first conçue pour la communauté du football amateur (street football, city-stades, Five). Elle permet de trouver, rejoindre et organiser des matchs en un clin d’œil, sans les tracas de logistique habituels.
 
-Projet fil rouge Ada Tech, arc 1.
+---
 
-**Stack** : React (Vite) pour le front, Node.js et Express pour le back, PostgreSQL dans Docker.
+## 📌 Contexte & Objectif
 
-## Prérequis
+### 🔴 Le problème actuel
+Organiser une session de football amateur relève souvent du parcours du combattant :
+- **Désorganisation :** Groupes de messagerie saturés, informations perdues et manque de suivi.
+- **Imprévus :** Les désistements de dernière minute qui font annuler les matchs faute de joueurs.
+- **Isolement :** Difficulté pour un joueur seul de s'intégrer ou de trouver des sessions disponibles près de chez lui.
 
-- **Git**
-- **Node.js** 20.19 ou plus (22 LTS conseillé), avec npm
-- **Docker Desktop** (avec Docker Compose), ouvert pendant que tu travailles
+### 🟢 La solution R1T
+L’objectif est de centraliser et de fluidifier le processus en proposant une expérience dédiée à la pratique :
+* Permettre aux joueurs de trouver instantanément une session locale.
+* Offrir aux organisateurs un outil clé en main pour gérer les inscriptions et la complétude de leurs matchs.
+* Créer une identité communautaire forte via des profils personnalisés.
 
-Pas besoin d'installer PostgreSQL : la base tourne dans un conteneur.
+---
 
-## 1. Cloner et installer
+## 🚀 Fonctionnalités de la V1
 
-```bash
-# Cloner le dépôt
-git clone https://github.com/radji-yanis/R1T.git
-cd R1T
+L'ensemble de ces fonctionnalités a été pensé pour répondre au cycle naturel d'une session, de la création à la composition des équipes :
 
-# Installer les dépendances du back
-cd back
-npm install
-cd ..
+### 👤 1. Identification & Communauté
+* **Authentification sécurisée :** Inscription et connexion via un formulaire épuré.
+* **Profil de joueur unique :**
+  - Personnalisation grâce à une galerie d’avatars illustrés de style urbain.
+  - Renseignements essentiels : Pseudo, email et **style de jeu/poste de prédilection** (ex: *Dernier rempart*, pivot, etc.).
+  - Édition rapide du profil et déconnexion sécurisée.
 
-# Installer les dépendances du front
-cd front
-npm install
-cd ..
+### 🔍 2. Recherche & Géolocalisation
+* **Feed des matchs ouverts :** Liste de l'ensemble des sessions disponibles présentées sous forme de cartes d'information claires (titre, lieu, créneau horaire, jauge de places).
+* **Filtres rapides :** Recherche temporelle (*Cette semaine*) et par format (*Type de match*).
+* **Rayon de recherche :** Système d'ajustement du périmètre de recherche (rayon en km) autour d'une adresse pour ne manquer aucune opportunité locale.
 
-# Créer le fichier d'environnement du back
-cp back/.env.example back/.env
-```
+### 📋 3. Gestion des Matchs ("Mes Matchs")
+* **Tableau de bord scindé :**
+  - **"J'organise"** : Centralise tous les matchs créés par le joueur, avec la possibilité de gérer l'organisation ou d'annuler une partie.
+  - **"Je joue"** : Permet de suivre les matchs rejoints et de s'y préparer.
+* **Nouveau Match :** Formulaire de création rapide incluant : titre de la session, lieu (adresse), format (ex: *5 contre 5*), date, heure de début et description libre.
 
-Ouvre `back/.env` et remplis les valeurs (réservées au développement local, le fichier n'est jamais commité) :
+### 🤝 4. Détail du Match & Matchmaking
+* **Fiche de match détaillée :** Centralise toutes les informations clés de l'événement (date, heure, lieu précis, description).
+* **Visualisation d'effectif :** Affichage d'une jauge en temps réel (ex: `7/10` inscrits) avec un trombinoscope affichant la photo et le pseudo de chaque joueur inscrit.
+* **Engagement flexible :** Inscription en un clic ou possibilité de se désister instantanément pour libérer sa place et permettre à un autre joueur de s'inscrire.
 
-```
-PORT=3000
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=r1t
-DB_PASSWORD=r1t_dev
-DB_NAME=r1t
-JWT_SECRET=change_me
-```
+## 🚀 Installation
 
-## 2. Lancer la base de données
-
-```bash
-# Démarrer PostgreSQL
-docker compose up -d
-
-# Créer les tables
-docker exec -i r1t-db psql -U r1t -d r1t < back/db/migration_up.sql
-
-# Charger les données de test
-docker exec -i r1t-db psql -U r1t -d r1t < back/db/seed.sql
-```
-
-> Sous Windows, utilise **Git Bash** : la redirection `<` ne fonctionne pas dans PowerShell.
-
-## 3. Lancer l'application
-
-Dans **deux terminaux** :
-
-```bash
-# Terminal 1 : back (http://localhost:3000)
-cd back
-npm run dev
-```
-
-```bash
-# Terminal 2 : front (http://localhost:5173)
-cd front
-npm run dev
-```
-
-## À compléter
-
-- [ ] Contexte et objectif du projet
-- [ ] Fonctionnalités de la V1
-- [ ] Conventions Git : noms de branches, format des commits, relecture
-- [ ] Décisions techniques (ADR)
+Pour installer et lancer le projet R1T en local, réfère-toi à notre guide détaillé :
+👉 [Guide d'installation de R1T](docs/install.md)
