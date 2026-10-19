@@ -31,6 +31,7 @@ export default function Recherche() {
     return (
         <>
             <Header titre="Recherche"/>
+            
             <MatchDrawer openedDrawer={openedDrawer} setOpenedDrawer={setOpenedDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
 
             {chargementRencontres
