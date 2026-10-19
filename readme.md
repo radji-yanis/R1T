@@ -50,4 +50,4 @@ L'ensemble de ces fonctionnalités a été pensé pour répondre au cycle nature
 ## Installation
 
 Pour installer et lancer le projet R1T en local, réfère-toi à notre guide détaillé :
-👉 [Guide d'installation de R1T](docs/install.md)
+👉 [Guide d'installation de R1T](docs/INSTALL.md)
