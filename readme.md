@@ -1,6 +1,6 @@
 # ⚽ R1T — Le foot simple, rapide et efficace
 
-> **R1T** (Round 1 Team) est une plateforme mobile-first conçue pour la communauté du football amateur (street football, city-stades, Five). Elle permet de trouver, rejoindre et organiser des matchs en un clin d’œil, sans les tracas de logistique habituels.
+> **R1T** est une plateforme mobile-first conçue pour la communauté du football amateur (street football, city-stades, Five). Elle permet de trouver, rejoindre et organiser des matchs en un clin d’œil, sans les tracas de logistique habituels.
 
 ---
 
