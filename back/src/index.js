@@ -18,8 +18,8 @@ app.use('/api/inscription', inscriptionRoutes);
 
 app.use((req, res) => res.status(404).json({ erreur: "Route inconnue" }));
 app.use((err, req, res, next) => {
-  console.error("[erreur]", err.message);
-  res.status(500).json({ erreur: err.message });
+  // console.error("[erreur]", err.message);
+  return res.status(500).json({ erreur: err.message });
 });
 
 app.listen(PORT, () => {
