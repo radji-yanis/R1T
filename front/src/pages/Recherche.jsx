@@ -5,6 +5,7 @@ import Card from "../components/Card/Card"
 import Loader from "../components/Loader/Loader"
 import SimpleMessage from "../components/SimpleMessage/SimpleMessage"
 import MatchDrawer from "../components/MatchDrawer/MatchDrawer"
+import Filters from '../components/Filters/Filters';
 
 export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
@@ -31,6 +32,9 @@ export default function Recherche() {
     return (
         <>
             <Header titre="Recherche"/>
+
+            {/* // todo : add geo there */}
+            <Filters/>
             
             <MatchDrawer openedDrawer={openedDrawer} setOpenedDrawer={setOpenedDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
 

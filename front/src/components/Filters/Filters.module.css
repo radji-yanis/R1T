@@ -7,17 +7,33 @@
 .filter select {
   flex: 1;
   min-width: 0;
-  padding: 12px;
+  height: 50px;
+  padding: 0 12px;
   background-color: var(--background);
   color: var(--white);
-  border: 1px solid var(--text);
+  border: 2px solid var(--text);
   border-radius: 10px;
   cursor: pointer;
   font-family: var(--font-title);
-  font-size: 16px;
+  font-size: 22px;
+  font-weight: 400;
+  appearance: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik03IDEwbDUgNSA1LTV6Ii8+PC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: right 4px center;
+  background-size: 18px;
+}
+
+.filter select:focus {
+  border: 2px solid var(--primary);
 }
 
 .filter select:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  outline: none;
+}
+
+.filter option {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
 }
