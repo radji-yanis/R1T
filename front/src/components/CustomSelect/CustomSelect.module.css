@@ -25,16 +25,16 @@
   @media (hover: hover) {
     &:hover:not([data-disabled]) {
       /* background-color: oklch(97% 0 0deg); */
-      border-color: var(--primary);
+      border-color: var(--white);
     }
   }
 
   &[data-pressed] {
-    border-color: var(--primary);
+    border-color: var(--white);
   }
 
   &:active:not([data-disabled]) {
-    border-color: var(--primary);
+    border-color: var(--white);
   }
 
   &[data-disabled] {
@@ -43,7 +43,7 @@
 
   &:focus-visible {
     outline: none;
-    border-color: var(--primary);
+    border-color: var(--white);
   }
 
   span {

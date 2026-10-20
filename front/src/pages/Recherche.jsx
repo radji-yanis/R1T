@@ -11,7 +11,7 @@ export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
     const [chargementRencontres, setChargementRencontres] = useState(true);
     const [detailedMatchId, setDetailedMatchId] = useState(null);
-    const [openedDrawer, setOpenedDrawer] = useState(false);
+    const [openedMatchDrawer, setOpenedMatchDrawer] = useState(false);
 
     useEffect(() => {
         const url = "http://localhost:3000/api/rencontres/";
@@ -32,18 +32,14 @@ export default function Recherche() {
     return (
         <>
             <Header titre="Recherche"/>
-
-            {/* // todo : add geo there */}
             <Filters/>
-            
-            <MatchDrawer openedDrawer={openedDrawer} setOpenedDrawer={setOpenedDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
-
+            <MatchDrawer openedDrawer={openedMatchDrawer} setOpenedDrawer={setOpenedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
             {chargementRencontres
                 ? <Loader/>
                 : rencontres.length === 0
                 ? <SimpleMessage content="Aucune rencontre, sorry bro."/>
                 : <section className='cards'>
-                    { rencontres.map(rencontre => <Card key={rencontre.id} openedDrawer={openedDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId} {...rencontre}/>) }
+                    { rencontres.map(rencontre => <Card key={rencontre.id} openedDrawer={openedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId} {...rencontre}/>) }
                 </section>
             }
         </>

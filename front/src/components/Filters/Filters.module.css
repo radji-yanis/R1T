@@ -1,10 +1,39 @@
-.filter {
+.geolocation {
+  margin-bottom: var(--space-sm);
+}
+
+.geolocation input {
+  box-sizing: border-box;
+  padding: 0 var(--space-sm);
+  padding-left: 50px;
+  margin: 0;
+  width: 100%;
+  height: 50px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: var(--dark-grey);
+  border-radius: 12px;
+  outline: none;
+  color: var(--light-grey);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  background-size: 20px 20px;
+
+  &::placeholder {
+      color: var(--placeholder);
+  }
+}
+
+.selects {
   display: flex;
   gap: var(--space-sm);
   width: 100%;
+  margin-bottom: var(--space-md);
 }
 
-.filter select {
+.selects select {
   flex: 1;
   min-width: 0;
   height: 50px;
@@ -24,15 +53,15 @@
   background-size: 18px;
 }
 
-.filter select:focus {
+.selects select:focus {
   border: 2px solid var(--primary);
 }
 
-.filter select:focus-visible {
+.selects select:focus-visible {
   outline: none;
 }
 
-.filter option {
+.selects option {
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
