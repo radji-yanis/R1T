@@ -2,12 +2,13 @@ import { useState, useTransition, useRef, useEffect } from 'react'
 import { Autocomplete } from '@base-ui/react/autocomplete';
 import debounce from 'debounce';
 
+import { getCities } from '../../api/geocodage';
+
 import styles from "./AutocompleteAdress.module.css"
 
-const API_URL = 'https://data.geopf.fr/geocodage/search/';
 const DEBOUNCE = 500;
 
-const executerRecherche = debounce((valeur, startTransition, setSearchResults, abortControllerRef, setIsTyping) => {
+const executerRecherche = debounce((value, startTransition, setSearchResults, abortControllerRef, setIsTyping) => {
     abortControllerRef.current?.abort();
     const controller = new AbortController();
     abortControllerRef.current = controller;
@@ -16,10 +17,7 @@ const executerRecherche = debounce((valeur, startTransition, setSearchResults, a
 
     startTransition(async () => {
         try {
-            const response = await fetch(`${API_URL}?q=${encodeURIComponent(valeur)}&limit=5&type=municipality`, {
-                signal: controller.signal
-            });
-            const data = await response.json();
+            const data = await getCities(value, controller.signal);
             setSearchResults(data.features || []); 
         } catch (err) {
             if (err.name === 'AbortError') {

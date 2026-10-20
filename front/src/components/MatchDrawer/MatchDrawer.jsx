@@ -8,6 +8,8 @@ import { useToast } from "../ToastNotification/ToastNotification"
 
 import { formatDate } from '../../utils';
 
+import { getRencontreById } from '../../api/rencontres';
+
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import styles from "./MatchDrawer.module.css";
@@ -31,12 +33,9 @@ export default function MatchDrawer({ openedDrawer, setOpenedDrawer, detailedMat
         if(detailedMatchId === null)
             return;
 
-        const url = `http://localhost:3000/api/rencontres/${detailedMatchId}`;
-        
         (async () => {
             try {
-                const response = await fetch(url)
-                const data = await response.json();
+                const data = await getRencontreById(detailedMatchId);
                 setDetails(data);
             } catch (error) {
                 console.log(error)
