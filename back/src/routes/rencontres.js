@@ -1,5 +1,6 @@
 import express from "express";
 import { pool } from "../db.js";
+import * as rencontreController from "../controllers/rencontre.js";
 
 const router = express.Router();
 
@@ -74,42 +75,9 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
-  try {
-    const matchId = Number(req.params.id);
+router.get("/:id", rencontreController.getById);
 
-    if (!Number.isSafeInteger(matchId) || matchId <= 0) {
-      return res.status(400).json({ error: "Invalid match ID" });
-    }
 
-    const { rows } = await pool.query(
-      `SELECT rencontre.id, rencontre.titre, rencontre.description, rencontre.lieu, rencontre.date_heure, rencontre.format, rencontre.statut, 
-        COUNT(inscription.utilisateur_id) AS nb_inscrits
-        FROM rencontre
-        LEFT JOIN inscription ON rencontre.id = inscription.rencontre_id
-        WHERE rencontre.id = $1
-        GROUP BY rencontre.id`,
-      [req.params.id],
-    );
-
-    if (rows.length === 0) {
-      return res.status(404).json({ error: "Match not found" });
-    }
-
-    const { rows: inscrits } = await pool.query(
-      `SELECT utilisateur.id, utilisateur.pseudo, utilisateur.avatar_id
-       FROM inscription
-       JOIN utilisateur ON utilisateur.id = inscription.utilisateur_id
-       WHERE inscription.rencontre_id = $1
-       ORDER BY inscription.date_inscription`,
-      [req.params.id],
-    );
-
-    res.json({ ...rows[0], inscrits });
-  } catch (err) {
-    next(err);
-  }
-});
 
 router.post("/create", async (req, res, next) => {
   try {
