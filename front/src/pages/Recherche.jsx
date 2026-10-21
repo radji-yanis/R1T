@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useTransition } from 'react'
 
 import Header from "../components/Header/Header"
 import Card from "../components/Card/Card"
@@ -7,6 +7,8 @@ import SimpleMessage from "../components/SimpleMessage/SimpleMessage"
 import MatchDrawer from "../components/MatchDrawer/MatchDrawer"
 import Filters from '../components/Filters/Filters';
 
+import { getRencontres } from '../api/rencontres'
+
 export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
     const [chargementRencontres, setChargementRencontres] = useState(true);
@@ -14,19 +16,16 @@ export default function Recherche() {
     const [openedMatchDrawer, setOpenedMatchDrawer] = useState(false);
 
     useEffect(() => {
-        const url = "http://localhost:3000/api/rencontres/";
-
         (async () => {
             try {
-                const response = await fetch(url)
-                const data = await response.json();
+                const data = await getRencontres();
                 setRencontres(data);
             } catch (error) {
-                console.log(error)
+                console.log(error);
             } finally {
-                setChargementRencontres(false)
+                setChargementRencontres(false);
             }
-        })()
+        })();
     }, []);
 
     return (
