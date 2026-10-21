@@ -32,7 +32,7 @@ export default function Recherche() {
     return (
         <>
             <Header titre="Recherche"/>
-            <Filters/>
+            <Filters setFilters={setFilters}/>
             <MatchDrawer openedDrawer={openedMatchDrawer} setOpenedDrawer={setOpenedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
             {chargementRencontres
                 ? <Loader/>

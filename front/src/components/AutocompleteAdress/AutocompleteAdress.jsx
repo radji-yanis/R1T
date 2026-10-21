@@ -91,17 +91,17 @@ export default function AutocompleteAdress({ cityValue, setCityValue }) {
             itemToStringValue={(item) => {
                 setDisabledInput(true);
                 setCityValue([
-                    `${item.properties.city} - ${item.properties.postcode}`,
+                    `${item.properties.postcode} ${item.properties.city}`,
                     item.properties.x,
                     item.properties.y
                 ]);
-                return `${item.properties.city} - ${item.properties.postcode}`;
+                return `${item.properties.postcode} ${item.properties.city}`;
             }}
             filter={null}
             disabled={disabledInput}
         >
             <div className={styles.inputContainer}>
-                <Autocomplete.Input placeholder="ex: Montreuil - 93100" className={styles.Input} />
+                <Autocomplete.Input placeholder="ex: 93100 Montreuil" className={styles.Input} />
                 {disabledInput &&
                     <div className={styles.inputMask} onClick={onMaskClick}></div>
                 }

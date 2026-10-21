@@ -6,25 +6,24 @@ import GeolocationDrawer from "../GeolocationDrawer/GeolocationDrawer";
 
 import styles from "./Filters.module.css";
 
-export default function Filters({ onFilter }) {
-  const [period, setPeriod] = useState("semaine");
+export default function Filters({ setFilters }) {
+  const [period, setPeriod] = useState("");
   const [format, setFormat] = useState("");
   const [locationValue, setLocationValue] = useState([]);
   const [openedGeolocationDrawer, setOpenedGeolocationDrawer] = useState(false);
 
   function handlePeriodChange(value) {
     setPeriod(value);
-    // onFilter?.(period, format, locationValue);
   }
 
   function handleFormatChange(value) {
     setFormat(value);
-    // onFilter?.(period, format, locationValue);
   }
 
-  // useEffect(() => {
-  //   onFilter(period, format, locationValue);
-  // }, [period, format, locationValue])
+  useEffect(() => {
+    // setFilters()
+    console.log(period, format, locationValue);
+  }, [period, format, locationValue])
 
   return (
     <>
@@ -32,12 +31,18 @@ export default function Filters({ onFilter }) {
         <input type="text" 
           value={
             locationValue?.[0]?.[0]
-              ? `${locationValue[0][0]} [${locationValue[1]}km]`
-              : "Saisir une localisation..."
+              ? `${locationValue[0][0]}`
+              : ""
           }
+          placeholder="Saisir une localisation..."
           onClick={() => setOpenedGeolocationDrawer(true)}
           readOnly
         />
+        { locationValue?.[0]?.[0] &&
+          <div className={styles.radius}>
+            {`${locationValue[1]}km`}
+          </div>
+        }
       </div>
       <div className={styles.selects}>
         <CustomSelect options={[
