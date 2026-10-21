@@ -14,11 +14,29 @@ export default function Recherche() {
     const [chargementRencontres, setChargementRencontres] = useState(true);
     const [detailedMatchId, setDetailedMatchId] = useState(null);
     const [openedMatchDrawer, setOpenedMatchDrawer] = useState(false);
+    const [filters, setFilters] = useState({});
+
+    // useEffect(() => {
+    //     (async () => {
+    //         try {
+    //             const data = await getRencontres();
+    //             setRencontres(data);
+    //         } catch (error) {
+    //             console.log(error);
+    //         } finally {
+    //             setChargementRencontres(false);
+    //         }
+    //     })();
+    // }, []);
 
     useEffect(() => {
+        if(Object.keys(filters).length === 0) return;
+
+        setChargementRencontres(true);
+
         (async () => {
             try {
-                const data = await getRencontres();
+                const data = await getRencontres(filters);
                 setRencontres(data);
             } catch (error) {
                 console.log(error);
@@ -26,13 +44,16 @@ export default function Recherche() {
                 setChargementRencontres(false);
             }
         })();
-    }, []);
+    }, [filters])
 
     return (
         <>
             <Header titre="Recherche"/>
             <Filters setFilters={setFilters}/>
             <MatchDrawer openedDrawer={openedMatchDrawer} setOpenedDrawer={setOpenedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
+            {rencontres.length !== 0 &&
+                <div style={{marginBottom: '0.5em'}}>{rencontres.length} {rencontres.length > 1 ? "rencontres trouvées" : "rencontre trouvée"}</div>
+            }
             {chargementRencontres
                 ? <Loader/>
                 : rencontres.length === 0

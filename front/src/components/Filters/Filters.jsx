@@ -21,8 +21,13 @@ export default function Filters({ setFilters }) {
   }
 
   useEffect(() => {
-    // setFilters()
-    console.log(period, format, locationValue);
+    setFilters({
+      period,
+      format,
+      lat: locationValue?.[0]?.[1] ?? null,
+      long: locationValue?.[0]?.[2] ?? null,
+      radius: locationValue?.[1] ?? null
+    })
   }, [period, format, locationValue])
 
   return (

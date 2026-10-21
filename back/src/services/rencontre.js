@@ -1,6 +1,63 @@
 import * as rencontreModel from "../models/rencontre.js";
 import { httpError } from "../utils/httpError.js";
 
+const validFormats = ["foot5", "foot7", "foot11"];
+const validPeriod = ["jour", "semaine", "mois"];
+
+const toISODate = (d) => {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+};
+
+export const getAll = async ({ format, period }) => {
+    if (format && !validFormats.includes(format)) {
+        return res.status(400).json({
+            error: "Invalid match format",
+        });
+    }
+
+
+    let dateDebut = null;
+    let dateFin = null;
+
+    if (period) {
+        if(!validPeriod.includes(period)) {
+            return res.status(400).json({
+                error: "Invalid period format",
+            });
+        }
+
+        const now = new Date();
+        const debut = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const fin = new Date(debut);
+
+        switch (period) {
+            case "jour":
+                break;
+            case "semaine":
+                const jour = (debut.getDay() + 6) % 7;
+                debut.setDate(debut.getDate() - jour);
+                fin.setTime(debut.getTime());
+                fin.setDate(debut.getDate() + 6);
+                break;
+            case "mois":
+                debut.setDate(1);
+                fin.setFullYear(debut.getFullYear(), debut.getMonth() + 1, 0);
+                break;
+        }
+
+        dateDebut = toISODate(debut);
+        dateFin =  toISODate(fin);
+    }
+
+
+    const rencontres = await rencontreModel.getAll(format, dateDebut, dateFin);
+
+    return rencontres;
+};
+
 export const getById = async (id) => {
     if (!Number.isInteger(Number(id)) || Number(id) <= 0) {
         throw httpError(400, "Invalid match id");
@@ -32,7 +89,6 @@ export const cancelById = async (id) => {
  export const create = async (titre, lieu, format, date_heure, description, organisateur_id, latitude, longitude) => {
     const lat = Number(latitude);
     const lng = Number(longitude);
-    const validFormats = ["foot5", "foot7", "foot11"];
 
     if (titre.trim().length < 3) {
         throw httpError(400, "Title is required and must be at least 3 characters long.");
