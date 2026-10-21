@@ -21,6 +21,10 @@ export const cancelById = async (req, res, next) => {
 };
 
 export const create = async (req, res, next) => {
+    if (!req.body) {
+        return res.status(400).json({ error: "Missing body" });
+    }
+
     const { titre, lieu, format, date_heure, description, organisateur_id, latitude, longitude } = req.body;
 
     if (!titre || !lieu || !format || !date_heure || !organisateur_id || !latitude || !longitude) {
@@ -29,7 +33,7 @@ export const create = async (req, res, next) => {
 
     try {
         const rencontre = await rencontreService.create(titre, lieu, format, date_heure, description, organisateur_id, latitude, longitude);
-        res.status(201).json(rencontre);
+        res.status(201).json({ message: "Match created successfully", rencontre });
     } catch (err) {
         next(err);
     }
