@@ -13,20 +13,15 @@ const toISODate = (d) => {
 
 export const getAll = async ({ format, period }) => {
     if (format && !validFormats.includes(format)) {
-        return res.status(400).json({
-            error: "Invalid match format",
-        });
+        throw httpError(400, "Invalid match format");
     }
-
 
     let dateDebut = null;
     let dateFin = null;
 
     if (period) {
         if(!validPeriod.includes(period)) {
-            return res.status(400).json({
-                error: "Invalid period format",
-            });
+            throw httpError(400, "Invalid period format");
         }
 
         const now = new Date();
@@ -51,7 +46,6 @@ export const getAll = async ({ format, period }) => {
         dateDebut = toISODate(debut);
         dateFin =  toISODate(fin);
     }
-
 
     const rencontres = await rencontreModel.getAll(format, dateDebut, dateFin);
 
