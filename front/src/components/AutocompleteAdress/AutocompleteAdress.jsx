@@ -90,8 +90,8 @@ export default function AutocompleteAdress({ cityValue, setCityValue }) {
                 setDisabledInput(true);
                 setCityValue([
                     `${item.properties.postcode} ${item.properties.city}`,
-                    item.properties.x,
-                    item.properties.y
+                    item.geometry.coordinates[0],
+                    item.geometry.coordinates[1]
                 ]);
                 return `${item.properties.postcode} ${item.properties.city}`;
             }}

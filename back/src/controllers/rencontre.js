@@ -1,13 +1,13 @@
 import * as rencontreService from "../services/rencontre.js";
 
 export const getAll = async (req, res, next) => {
-    const { period, format, lat, long, radius } = req.query;
+    const { period, format, lat, lng, radius } = req.query;
 
     const filters = {
         period: period || null,
         format: format || null,
         lat: lat !== undefined ? Number(lat) : null,
-        long: long !== undefined ? Number(long) : null,
+        lng: lng !== undefined ? Number(lng) : null,
         radius: radius !== undefined ? Number(radius) : null,
     };
 

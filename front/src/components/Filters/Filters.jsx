@@ -24,8 +24,8 @@ export default function Filters({ setFilters }) {
     setFilters({
       period,
       format,
-      lat: locationValue?.[0]?.[1] ?? null,
-      long: locationValue?.[0]?.[2] ?? null,
+      lng: locationValue?.[0]?.[1] ?? null,
+      lat: locationValue?.[0]?.[2] ?? null,
       radius: locationValue?.[1] ?? null
     })
   }, [period, format, locationValue])

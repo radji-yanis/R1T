@@ -11,7 +11,8 @@ const toISODate = (d) => {
     return `${y}-${m}-${day}`;
 };
 
-export const getAll = async ({ format, period }) => {
+// TODO : handle lat, lng & radius
+export const getAll = async ({ format, period, lat, lng, radius }) => {
     if (format && !validFormats.includes(format)) {
         throw httpError(400, "Invalid match format");
     }
@@ -21,7 +22,7 @@ export const getAll = async ({ format, period }) => {
 
     if (period) {
         if(!validPeriod.includes(period)) {
-            throw httpError(400, "Invalid period format");
+            throw httpError(400, "Invalid period");
         }
 
         const now = new Date();
@@ -47,7 +48,16 @@ export const getAll = async ({ format, period }) => {
         dateFin =  toISODate(fin);
     }
 
-    const rencontres = await rencontreModel.getAll(format, dateDebut, dateFin);
+    if(lat && !(Number.isFinite(lat) && lat >= -90 && lat <= 90)) 
+        throw httpError(400, "Invalid latitude");
+
+    if(lng && !(Number.isFinite(lng) && lng >= -180 && lng <= 180)) 
+        throw httpError(400, "Invalid longitude");
+
+    if(radius && !(Number.isFinite(radius) && radius >= 10 && lng <= 80))  
+        throw httpError(400, "Invalid radius");
+
+    const rencontres = await rencontreModel.getAll(format, dateDebut, dateFin, lat, lng, radius);
 
     return rencontres;
 };

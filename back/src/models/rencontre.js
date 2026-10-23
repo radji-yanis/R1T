@@ -1,6 +1,6 @@
 import { pool } from "../db.js";
 
-export const getAll = async (format, dateDebut, dateFin) => {
+export const getAll = async (format, dateDebut, dateFin, lat, lng, radius) => {
     let query = `
         SELECT 
             rencontre.*, 
@@ -20,17 +20,29 @@ export const getAll = async (format, dateDebut, dateFin) => {
 
     const params = [];
 
-    if (dateDebut) {
+    if(dateDebut) {
       params.push(dateDebut);
       query += ` AND rencontre.date_heure >= $${params.length}::date`;
     }
-    if (dateFin) {
+    if(dateFin) {
       params.push(dateFin);
       query += ` AND rencontre.date_heure < ($${params.length}::date + INTERVAL '1 day')`;
     }
-    if (format) {
+    if(format) {
       params.push(format);
       query += ` AND rencontre.format = $${params.length}`;
+    }
+
+    if(lat && lng) {
+      params.push(lat, lng, radius);
+      const center = `ll_to_earth($${params.length - 2}::float8, $${params.length - 1}::float8)`;
+      const radiusMeters = `$${params.length}::float8 * 1000`;
+      const point = `ll_to_earth(rencontre.latitude, rencontre.longitude)`;
+
+      query += `
+        AND earth_box(${center}, ${radiusMeters}) @> ${point}
+        AND earth_distance(${point}, ${center}) <= ${radiusMeters}
+      `;
     }
 
     query += " ORDER BY rencontre.date_heure";
