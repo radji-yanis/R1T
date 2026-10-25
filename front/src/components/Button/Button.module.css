@@ -8,3 +8,14 @@
     border-radius: 12px;
     padding-top: 4px;
 }
+
+.button.secondary {
+    background-color: var(--background);
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.button[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+}

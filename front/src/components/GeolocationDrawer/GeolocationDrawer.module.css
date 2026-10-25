@@ -1,0 +1,12 @@
+.form .label:last-child{
+    margin-bottom: 0;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: var(--space-sm);
+}

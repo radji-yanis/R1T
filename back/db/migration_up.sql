@@ -28,6 +28,12 @@ CREATE TABLE rencontre (
   organisateur_id INTEGER NOT NULL REFERENCES utilisateur(id)
 );
 
+CREATE EXTENSION IF NOT EXISTS cube;
+CREATE EXTENSION IF NOT EXISTS earthdistance;
+
+CREATE INDEX idx_rencontre_earth
+ON rencontre USING GIST (ll_to_earth(latitude, longitude));
+
 CREATE TABLE inscription (
   utilisateur_id INTEGER NOT NULL REFERENCES utilisateur(id) ON DELETE CASCADE,
   rencontre_id INTEGER NOT NULL REFERENCES rencontre(id) ON DELETE CASCADE,
