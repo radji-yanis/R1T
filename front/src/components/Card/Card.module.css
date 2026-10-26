@@ -5,6 +5,7 @@
     background-color: var(--dark-grey);
     margin-bottom: var(--space-sm);
     overflow: hidden;
+    border: 1px solid var(--grey);
 }
 
 .card_top {
