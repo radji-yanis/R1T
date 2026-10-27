@@ -1,0 +1,74 @@
+.drawer-title {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 0 0 20px;
+}
+
+.match-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  color: #8c8c9a;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background-color: #2b2b34;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #71717a;
+}
+
+.form-group textarea {
+  resize: none;
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: #ff5500;
+  color: #1a1a20;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-cancel {
+  background: none;
+  color: #8c8c9a;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+}

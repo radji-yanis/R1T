@@ -11,19 +11,33 @@ export async function getRencontres(filters) {
 
     const response = await fetch(`${BASE_URL}/rencontres/?${params.toString()}`);
 
-    if (!response.ok) {
-        throw new Error(`Erreur HTTP ${response.status}`);
-    }
+  if (!response.ok) {
+    throw new Error(`Erreur HTTP ${response.status}`);
+  }
 
-    return response.json();
+  return response.json();
 }
 
 export async function getRencontreById(id) {
-    const response = await fetch(`${BASE_URL}/rencontres/${id}`);
+  const response = await fetch(`${BASE_URL}/rencontres/${id}`);
 
-    if (!response.ok) {
-        throw new Error(`Erreur HTTP ${response.status}`);
-    }
+  if (!response.ok) {
+    throw new Error(`Erreur HTTP ${response.status}`);
+  }
 
-    return response.json();
+  return response.json();
+}
+
+export async function createRencontre(data) {
+  const response = await fetch(`${BASE_URL}/rencontres/create/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Erreur HTTP ${response.status}`);
+  }
+
+  return response.json();
 }
