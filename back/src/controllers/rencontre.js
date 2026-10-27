@@ -1,5 +1,24 @@
 import * as rencontreService from "../services/rencontre.js";
 
+export const getAll = async (req, res, next) => {
+    const { period, format, lat, lng, radius } = req.query;
+
+    const filters = {
+        period: period || null,
+        format: format || null,
+        lat: lat !== undefined ? Number(lat) : null,
+        lng: lng !== undefined ? Number(lng) : null,
+        radius: radius !== undefined ? Number(radius) : null,
+    };
+
+    try {
+        const rencontres = await rencontreService.getAll(filters)
+        res.status(200).json(rencontres);
+    } catch (err) {
+        next(err);
+    }
+}
+
 export const getById = async (req, res, next) => {
     const id = req.params.id;
     try {

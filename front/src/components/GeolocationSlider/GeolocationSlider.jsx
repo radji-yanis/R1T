@@ -6,8 +6,8 @@ export default function GeolocationSlider({ radiusValue, setRadiusValue }) {
     return (
         <Slider.Root 
             value={radiusValue}
-            min={0}
-            max={100}
+            min={10}
+            max={80}
             step={10}
             onValueChange={(value) => {
                 setRadiusValue(value);

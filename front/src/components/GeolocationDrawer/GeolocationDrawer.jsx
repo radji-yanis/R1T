@@ -9,7 +9,7 @@ import styles from "./GeolocationDrawer.module.css";
 
 const DEFAULT_RADIUS = 20;
 
-export default function GeolocationDrawer({ setLocationValue, openedGeolocationDrawer, setOpenedGeolocationDrawer }) {
+export default function GeolocationDrawer({ setLocationValue, openedDrawer, setOpenedDrawer }) {
     const [cityValue, setCityValue] = useState([]);
     const [radiusValue, setRadiusValue] = useState(DEFAULT_RADIUS);
 
@@ -18,7 +18,7 @@ export default function GeolocationDrawer({ setLocationValue, openedGeolocationD
             cityValue,
             radiusValue
         ]);
-        setOpenedGeolocationDrawer(false);
+        setOpenedDrawer(false);
     }
 
     const stickyFooter = <>
@@ -27,7 +27,7 @@ export default function GeolocationDrawer({ setLocationValue, openedGeolocationD
     </>;
  
     return (
-        <BottomDrawer open={openedGeolocationDrawer} setOpen={setOpenedGeolocationDrawer} stickyFooter={stickyFooter}>
+        <BottomDrawer open={openedDrawer} setOpen={setOpenedDrawer} stickyFooter={stickyFooter}>
             <div className={styles.form}>
                 <label className={styles.label}>
                     Adresse
