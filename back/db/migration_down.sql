@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS inscription;
+DROP TABLE IF EXISTS inscription_rencontre;
 DROP TABLE IF EXISTS rencontre;
 DROP TABLE IF EXISTS utilisateur;
 

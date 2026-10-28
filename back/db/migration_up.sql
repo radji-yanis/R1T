@@ -7,8 +7,7 @@ CREATE TABLE utilisateur (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) NOT NULL UNIQUE,
   mot_de_passe_hash VARCHAR(255) NOT NULL,
-  pseudo VARCHAR(50) NOT NULL,
-  ville VARCHAR(100),
+  pseudo VARCHAR(20) NOT NULL UNIQUE,
   style style_jeu ,
   avatar_id INTEGER NOT NULL DEFAULT 1 CHECK (avatar_id BETWEEN 1 AND 30),
   date_creation TIMESTAMP NOT NULL DEFAULT now()
@@ -34,7 +33,7 @@ CREATE EXTENSION IF NOT EXISTS earthdistance;
 CREATE INDEX idx_rencontre_earth
 ON rencontre USING GIST (ll_to_earth(latitude, longitude));
 
-CREATE TABLE inscription (
+CREATE TABLE inscription_rencontre (
   utilisateur_id INTEGER NOT NULL REFERENCES utilisateur(id) ON DELETE CASCADE,
   rencontre_id INTEGER NOT NULL REFERENCES rencontre(id) ON DELETE CASCADE,
   date_inscription TIMESTAMP NOT NULL DEFAULT now(),
