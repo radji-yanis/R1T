@@ -51,6 +51,17 @@
   }
 }
 
+.classic {
+  font-family: var(--font-text);
+  font-size: 18px;
+  background-color: var(--dark-grey);
+  border-radius: 12px;
+  outline: none;
+  border: none;
+  color: var(--light-grey);
+  padding: 0 var(--space-sm);
+}
+
 .Positioner {
   outline: none;
   z-index: 10;

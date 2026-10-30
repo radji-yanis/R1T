@@ -5,7 +5,8 @@ import AutocompleteAdress from "../../components/AutocompleteAdress/Autocomplete
 import GeolocationSlider from "../../components/GeolocationSlider/GeolocationSlider";
 import Button from "../Button/Button";
 
-import styles from "./GeolocationDrawer.module.css";
+// import styles from "./GeolocationDrawer.module.css";
+import formStyles from "../../form.module.css";
 
 const DEFAULT_RADIUS = 20;
 
@@ -28,12 +29,12 @@ export default function GeolocationDrawer({ setLocationValue, openedDrawer, setO
  
     return (
         <BottomDrawer open={openedDrawer} setOpen={setOpenedDrawer} stickyFooter={stickyFooter}>
-            <div className={styles.form}>
-                <label className={styles.label}>
+            <div className={formStyles.form}>
+                <label className={formStyles.label}>
                     Adresse
                     <AutocompleteAdress cityValue={cityValue} setCityValue={setCityValue} />
                 </label>
-                <label className={styles.label}  data-base-ui-swipe-ignore style={{ touchAction: 'pan-y', position: 'relative' }}>
+                <label className={formStyles.label} data-base-ui-swipe-ignore style={{ touchAction: 'pan-y', position: 'relative' }}>
                     Dans un rayon de
                     <GeolocationSlider radiusValue={radiusValue} setRadiusValue={setRadiusValue} />
                 </label>

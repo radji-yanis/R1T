@@ -1,19 +1,28 @@
-import styles from "./CreateDrawer.module.css";
+import { useRef, useState } from 'react';
+
 import BottomDrawer from "../BottomDrawer/BottomDrawer";
 import Button from "../Button/Button";
+import CustomSelect from "../CustomSelect/CustomSelect";
+import AutocompleteAdress from "../../components/AutocompleteAdress/AutocompleteAdress";
+
 import { createRencontre } from "../../api/rencontres";
 import { useToast } from "../ToastNotification/ToastNotification";
 
-const stickyFooter = (
-  <Button type="submit" form="matchForm" className="btn-submit">
-    CRÉER LE MATCH
-  </Button>
-);
+// import styles from "./CreateDrawer.module.css";
+import formStyles from "../../form.module.css";
 
 export default function CreateDrawer(props) {
   const { openedDrawer, setOpenedDrawer } = props;
 
+  const [cityValue, setCityValue] = useState([]);
+  const formRef = useRef(null);
   const toast = useToast();
+
+  const stickyFooter = (
+    <Button onClick={() => formRef.current && formRef.current.requestSubmit()} form="matchForm" className="btn-submit">
+      CRÉER LE MATCH
+    </Button>
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,10 +31,11 @@ export default function CreateDrawer(props) {
 
     const data = Object.fromEntries(formData.entries());
     data.date_heure = `${data.date} ${data.time}`;
+    data.lieu = cityValue[0];
+    data.longitude = Number(cityValue[1]);
+    data.latitude = Number(cityValue[2]);
     //temporaire
     data.organisateur_id = 1;
-    data.latitude = 10;
-    data.longitude = 10;
 
     createRencontre(data);
 
@@ -41,54 +51,40 @@ export default function CreateDrawer(props) {
         open={openedDrawer}
         setOpen={setOpenedDrawer}
       >
-        <h2 className={styles.drawerTitle}>NOUVEAU MATCH</h2>
         <form
           id="matchForm"
-          className={styles.matchForm}
+          className={formStyles.form}
           onSubmit={handleSubmit}
+          ref={formRef}        
         >
-          <div className={styles.formGroup}>
-            <label>Titre</label>
+          <label>Titre
             <input name="titre" type="text" placeholder="" required />
-          </div>
+          </label>
 
-          <div className={styles.formGroup}>
-            <label>Lieu</label>
-            <input name="lieu" type="text" placeholder="" required />
-          </div>
+          <label>Adresse
+            <AutocompleteAdress name="lieu" required={true} cityValue={cityValue} setCityValue={setCityValue} />
+          </label>
 
-          <div className={styles.formGroup}>
-            <label>Format</label>
-            <div className="select-wrapper">
-              <select name="format" defaultValue="5 contre 5">
-                <option value="foot5">5 contre 5</option>
-                <option value="foot7">7 contre 7</option>
-                <option value="foot11">11 contre 11</option>
-              </select>
-            </div>
-          </div>
+          <label>Format
+            <CustomSelect name="format" isClassic options={[
+              { label: '5 contre 5', value: 'foot5' },
+              { label: '7 contre 7', value: 'foot7' },
+              { label: '11 contre 11', value: 'foot11' },
+            ]}/>
+          </label>
 
-          <div className={styles.formRow}>
-            <div className={styles.formGroup}>
-              <label>Date</label>
-              <input
-                name="date"
-                type="date"
-                placeholder="jj/mm/aaaa"
-                required
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Heure</label>
+          <div className={formStyles.row}>
+            <label>Date
+              <input name="date" type="date" placeholder="jj/mm/aaaa" min={new Date().toISOString().split('T')[0]} required />
+            </label>
+            <label>Heure
               <input name="time" type="time" placeholder="-- : --" required />
-            </div>
+            </label>
           </div>
 
-          <div className={styles.formGroup}>
-            <label>Description</label>
-            <textarea name="description" placeholder="" rows={4} />
-          </div>
-          <button type="submit">Créer le match</button>
+          <label>Description
+            <textarea name="description" placeholder="" rows={3} />
+          </label>
         </form>
       </BottomDrawer>
     </>
