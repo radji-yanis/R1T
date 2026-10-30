@@ -29,7 +29,7 @@ const executerRecherche = debounce((value, startTransition, setSearchResults, ab
     });
 }, DEBOUNCE); 
 
-export default function AutocompleteAdress({ cityValue, setCityValue }) {
+export default function AutocompleteAdress({ name = "", required = false, cityValue, setCityValue }) {
 
     const [searchValue, setSearchValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -71,6 +71,8 @@ export default function AutocompleteAdress({ cityValue, setCityValue }) {
 
     return (
         <Autocomplete.Root
+            name={name}
+            required={required}
             items={searchResults}
             value={searchValue}
             onValueChange={(nextValue) => {
