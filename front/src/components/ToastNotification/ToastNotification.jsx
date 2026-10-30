@@ -48,7 +48,7 @@ function ToastList() {
           <Toast.Description className={styles.Description} />
         </div>
         {/* Le bouton qui retire ce toast de la liste */}
-        <Toast.Close className={styles.Close}>Fermer</Toast.Close>
+        <Toast.Close className={styles.Close}></Toast.Close>
       </Toast.Content>
     </Toast.Root>
   ));
@@ -62,10 +62,10 @@ export function useToast() {
 
   return {
     // toast.success("message") ajoute un toast vert avec le titre "Succès"
-    success: (message) =>
-      toastManager.add({ title: "Success", description: message, type: "success" }),
+    success: (message, title = "Succès") =>
+      toastManager.add({ title: title, description: message, type: "success" }),
     // toast.error("message") ajoute un toast rouge avec le titre "Erreur"
-    error: (message) =>
-      toastManager.add({ title: "Error", description: message, type: "error" }),
+    error: (message, title = "Erreur") =>
+      toastManager.add({ title: title, description: message, type: "error" }),
   };
 }
