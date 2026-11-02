@@ -1,11 +1,11 @@
 import { Select } from '@base-ui/react/select';
 import styles from './CustomSelect.module.css';
 
-export default function CustomSelect({options, onChange}) {
+export default function CustomSelect({name = "", isClassic = false, options, onChange}) {
   return (
     <div className={styles.Field}>
-      <Select.Root items={options} defaultValue={options[0].value} onValueChange={onChange}>
-        <Select.Trigger className={styles.Select}>
+      <Select.Root name={name} items={options} defaultValue={options[0].value} onValueChange={onChange}>
+        <Select.Trigger className={`${styles.Select} ${isClassic ? styles.classic : ""}`}>
           <Select.Value className={styles.Value} />
           <Select.Icon>
             <CaretUpDownIcon />

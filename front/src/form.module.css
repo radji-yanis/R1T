@@ -1,0 +1,63 @@
+.form .label:last-child{
+    margin-bottom: 0;
+}
+
+.row {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.row label {
+    flex-grow: 1;
+}
+
+.form label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 16px;
+    color: var(--text);
+    margin-bottom: 14px;
+}
+
+.form input, .form textarea {
+    box-sizing: border-box;
+    padding: 0 var(--space-sm);
+    margin: 0;
+    width: 100%;
+    height: 50px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: var(--dark-grey);
+    border-radius: 12px;
+    outline: none;
+    color: var(--light-grey);
+
+    &::placeholder {
+        color: var(--placeholder);
+    }
+}
+
+.form textarea {
+    padding: var(--space-sm);
+    height: auto;
+}
+
+.form input[type="date"]::-webkit-calendar-picker-indicator, 
+.form input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+/* .form input[type="date"], .form input[type="time"] {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2QyZDJkMiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNMy41IDBhLjUuNSAwIDAgMSAuNS41VjFoOFYuNWEuNS41IDAgMCAxIDEgMFYxaDFhMiAyIDAgMCAxIDIgMnYxMWEyIDIgMCAwIDEtMiAySDJhMiAyIDAgMCAxLTItMlYzYTIgMiAwIDAgMSAyLTJoMVYuNWEuNS41IDAgMCAxIC41LS41ek0xIDR2MTBhMSAxIDAgMCAwIDEgMWgxMmExIDEgMCAwIDAgMS0xVjRIMXoiLz48L3N2Zz4=");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    padding-right: 40px;
+}
+
+.form input[type="time"] {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2QyZDJkMiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJNOCAzLjVhLjUuNSAwIDAgMC0xIDBWOWEuNS41IDAgMCAwIC4yNTIuNDM0bDMuNSAyYS41LjUgMCAwIDAgLj45Ni0uODY4TDggOC43MVYzLjV6Ii8+PHBhdGggZD0iTTggMTZBOCA4IDAgMSAwIDggMGE4IDggMCAwIDAgMCAxNnptNy04QTcgNyAwIDEgMSAxIDhhNyA3IDAgMCAxIDE0IDB6Ii8+PC9zdmc+");
+} */
