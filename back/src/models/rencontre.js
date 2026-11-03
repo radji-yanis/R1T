@@ -119,3 +119,14 @@ export const create = async (
 
   return rows[0];
 };
+
+export const getOrganizedByUserId = async (userId) => {
+  const { rows } = await pool.query(
+    `SELECT *
+        FROM rencontre
+        WHERE organisateur_id = $1
+        ORDER BY date_heure`,
+    [userId],
+  );
+  return rows;
+};
