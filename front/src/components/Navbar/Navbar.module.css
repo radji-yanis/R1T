@@ -5,35 +5,38 @@
   width: 100%;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
-  background-color: #1a1b1f;
+  background-color: var(--background);
   padding: 12px 0;
   border-top: 1px solid var(--grey);
 }
 
-.navbar-item {
+.navbarItem {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 33.333%;
   gap: 6px;
-  color: #9ca3af;
+  color: var(--text);
 }
 
-.navbar-item img {
+.navbarItem img {
   width: 24px;
   height: 24px;
 }
-.navbar-item.active {
-  color: #ff5500;
+
+.navbarItem.active {
+  color: var(--primary);
 }
 
-.navbar-item.active img {
+.navbarItem.active img {
   filter: brightness(0) saturate(100%) invert(39%) sepia(99%) saturate(3690%)
     hue-rotate(359deg) brightness(102%) contrast(106%);
 }
-.navbar-item span {
+
+.navbarItem span {
   font-family: var(--font-title);
   font-size: 20px;
   text-transform: uppercase;
