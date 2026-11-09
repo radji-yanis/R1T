@@ -26,7 +26,10 @@ export default function MatchDrawer({ openedDrawer, setOpenedDrawer, detailedMat
     const toast = useToast();
 
     const stickyFooter = (
-        <Button onClick={() => toast.success(`inscription au match ${detailedMatchId}`)}>Inscription</Button>
+        <Button onClick={() => toast.success(
+            `inscription au match ${detailedMatchId} (fake)`, 
+            "Inscription confirmée"
+        )}>Inscription</Button>
     )
 
     useEffect(() => {
