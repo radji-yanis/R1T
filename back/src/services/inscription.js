@@ -34,6 +34,6 @@ export const addUserInMatch = async (utilisateur_id, rencontre_id) => {
 };
 
 export const getMatchsByUserId = async (utilisateur_id) => {
-  const rencontres = await inscriptionModel.getMatchsByUserId(utilisateur_id);
+  const rencontres = await inscriptionModel.getNotOrganizedMatchsByUserId(utilisateur_id);
   return rencontres;
 };

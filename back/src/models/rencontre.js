@@ -122,10 +122,20 @@ export const create = async (
 
 export const getOrganizedByUserId = async (userId) => {
   const { rows } = await pool.query(
-    `SELECT *
-        FROM rencontre
-        WHERE organisateur_id = $1
-        ORDER BY date_heure`,
+    `SELECT
+      rencontre.*,
+      COALESCE(inscrits.nb_inscrits, 0)::int AS nb_inscrits
+    FROM rencontre
+    LEFT JOIN (
+      SELECT rencontre_id, COUNT(*) AS nb_inscrits
+      FROM inscription_rencontre
+      GROUP BY rencontre_id
+    ) AS inscrits
+      ON rencontre.id = inscrits.rencontre_id
+    WHERE rencontre.organisateur_id = $1
+      AND rencontre.statut != 'annulee'
+      AND rencontre.date_heure >= NOW()
+    ORDER BY rencontre.date_heure`,
     [userId],
   );
   return rows;

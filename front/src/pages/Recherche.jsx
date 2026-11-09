@@ -16,19 +16,6 @@ export default function Recherche() {
     const [openedMatchDrawer, setOpenedMatchDrawer] = useState(false);
     const [filters, setFilters] = useState({});
 
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const data = await getRencontres();
-    //             setRencontres(data);
-    //         } catch (error) {
-    //             console.log(error);
-    //         } finally {
-    //             setChargementRencontres(false);
-    //         }
-    //     })();
-    // }, []);
-
     useEffect(() => {
         if(Object.keys(filters).length === 0) return;
 
@@ -39,7 +26,7 @@ export default function Recherche() {
                 const data = await getRencontres(filters);
                 setRencontres(data);
             } catch (error) {
-                console.log(error);
+                toast.error("Impossible de charger les matchs.");
             } finally {
                 setChargementRencontres(false);
             }
@@ -57,7 +44,7 @@ export default function Recherche() {
             {chargementRencontres
                 ? <Loader/>
                 : rencontres.length === 0
-                ? <SimpleMessage content="Aucune rencontre, sorry bro."/>
+                ? <SimpleMessage content="Aucune rencontre trouvée."/>
                 : <section className='cards'>
                     { rencontres.map(rencontre => <Card key={rencontre.id} openedDrawer={openedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId} {...rencontre}/>) }
                 </section>

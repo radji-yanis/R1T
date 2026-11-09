@@ -29,7 +29,7 @@ function Navbar() {
       </NavLink>
 
       <NavLink
-        to="/profil"
+        to="/mon-profil"
         className={({ isActive }) =>
           `${styles.navbarItem} ${isActive ? styles.active : ""}`
         }

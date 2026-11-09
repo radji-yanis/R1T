@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import { getOrganizedMatches, getRegisteredMatches } from "../api/rencontres";
+import { useToast } from "../components/ToastNotification/ToastNotification"
+
 import Header from "../components/Header/Header";
+import Card from "../components/Card/Card";
 import CreateDrawer from "../components/CreateDrawer/CreateDrawer";
+import MatchDrawer from "../components/MatchDrawer/MatchDrawer"
 import Button from "../components/Button/Button";
-import "./MesMatchs.css";
+import Loader from "../components/Loader/Loader"
+import SimpleMessage from "../components/SimpleMessage/SimpleMessage";
 
 export default function MesMatchs() {
   const [openedDrawer, setOpenedDrawer] = useState(false);
-
+  const [detailedMatchId, setDetailedMatchId] = useState(null);
+  const [openedMatchDrawer, setOpenedMatchDrawer] = useState(false);
   const [organizedMatches, setOrganizedMatches] = useState([]);
   const [registeredMatches, setRegisteredMatches] = useState([]);
-  const [error, setError] = useState("");
+  const [chargementRencontres, setChargementRencontres] = useState(true);
+  
+  const toast = useToast();
 
   useEffect(() => {
     async function loadMatches() {
@@ -23,64 +31,54 @@ export default function MesMatchs() {
         setOrganizedMatches(organized);
         setRegisteredMatches(registered);
       } catch (err) {
-        setError("Unable to load matches.");
-        console.error(err);
+        toast.error("Impossible de charger les matchs.");
+      } finally {
+        setChargementRencontres(false);
       }
     }
 
     loadMatches();
   }, []);
 
-  const switchDrawer = () => {
-    setOpenedDrawer((prev) => !prev);
-  };
-
   return (
     <>
       <Header titre="Mes matchs" />
-
-      {error && <p className="matches-error">{error}</p>}
-
-      <section className="matches-section">
-        <h2>J'ORGANISE</h2>
-
-        {organizedMatches.length === 0 ? (
-          <p>Aucun match organisé.</p>
-        ) : (
-          organizedMatches.map((match) => (
-            <article className="match-card" key={match.id}>
-              <h3>{match.titre}</h3>
-              <p>{match.lieu}</p>
-              <p>{new Date(match.date_heure).toLocaleString("fr-FR")}</p>
-            </article>
-          ))
-        )}
+      <section className="section">
+        <h2 className="h2-min">J'ORGANISE</h2>
+        {chargementRencontres 
+          ? <Loader/>
+          : <>
+            {organizedMatches.length === 0 ? (
+              <SimpleMessage content="Aucun match organisé."/>
+            ) : (
+              organizedMatches.map((match) => (
+                <Card key={match.id} openedDrawer={openedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId} {...match}/>
+              ))
+            )}
+            <Button onClick={() => setOpenedDrawer(true)} isSecondary>NOUVEAU MATCH</Button>
+          </>
+        }
       </section>
-
-      <div className="new-match-action">
-        <Button onClick={switchDrawer}>NOUVEAU MATCH</Button>
-      </div>
-
-      <section className="matches-section">
-        <h2>JE JOUE</h2>
-
-        {registeredMatches.length === 0 ? (
-          <p>Aucun match rejoint.</p>
-        ) : (
-          registeredMatches.map((match) => (
-            <article className="match-card" key={match.id}>
-              <h3>{match.titre}</h3>
-              <p>{match.lieu}</p>
-              <p>{new Date(match.date_heure).toLocaleString("fr-FR")}</p>
-            </article>
-          ))
-        )}
+      <section>
+        <h2 className="h2-min">JE JOUE</h2>
+        {chargementRencontres 
+          ? <Loader/>
+          : <>
+            {registeredMatches.length === 0 ? (
+              <SimpleMessage content="Aucun match rejoint."/>
+            ) : (
+              registeredMatches.map((match) => (
+                <Card key={match.id} openedDrawer={openedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId} {...match}/>
+              ))
+            )}
+          </>
+        }
       </section>
-
       <CreateDrawer
         setOpenedDrawer={setOpenedDrawer}
         openedDrawer={openedDrawer}
       />
+      <MatchDrawer openedDrawer={openedMatchDrawer} setOpenedDrawer={setOpenedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
     </>
   );
 }
