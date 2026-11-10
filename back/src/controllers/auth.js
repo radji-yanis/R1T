@@ -3,7 +3,7 @@ import { ErrorHttp } from "../errors.js";
 
 const EMAIL_FORMAT = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD_LENGTH = 8;
-const DUREE_COOKIE_MS = 2 * 60 * 60 * 1000;
+const MAX_AGE = 2 * 60 * 60 * 1000;
 const VALID_STYLES = [
   "renard_surfaces",
   "magicien",
@@ -58,4 +58,51 @@ export async function registration(req, res) {
     avatar_id: Number(body.avatar_id),
   });
   res.status(201).json({ user });
+}
+function validateConnexion({ email, password }) {
+  const errors = {};
+  if (typeof email !== "string" || !EMAIL_FORMAT.test(email.trim())) {
+    errors.email = "L'email n'a pas un format valide";
+  }
+  if (typeof password !== "string" || password.length < MIN_PASSWORD_LENGTH) {
+    errors.password = `Le mot de passe fait au moins ${MIN_PASSWORD_LENGTH} caractères`;
+  }
+
+  return errors;
+}
+
+export async function connexion(req, res) {
+  const body = req.body ?? {};
+  const errors = validateConnexion(body);
+  if (Object.keys(errors).length > 0) {
+    throw new ErrorHttp(422, "Données invalides", errors);
+  }
+
+  const [user, token] = await authService.connect({
+    email: normalizeEmail(body.email),
+    password: body.password,
+  });
+
+  res.cookie("token", token, {
+    maxAge: MAX_AGE,
+    httpOnly: true,
+    // secure: true,
+    sameSite: "lax",
+  });
+
+  res.status(200).json({ user });
+}
+
+export async function me(req, res) {
+  const user = await authService.profile(req.user.id);
+  res.json({ user });
+}
+
+export async function disconnect(req, res) {
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+  res.status(204).end();
 }

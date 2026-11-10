@@ -116,6 +116,6 @@ export const create = async (
       longitude,
     ],
   );
-
+  
   return rows[0];
 };
