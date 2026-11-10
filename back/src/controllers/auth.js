@@ -59,7 +59,7 @@ export async function registration(req, res) {
   });
   res.status(201).json({ user });
 }
-function validateConnexion({ email, password }) {
+function validateConnection({ email, password }) {
   const errors = {};
   if (typeof email !== "string" || !EMAIL_FORMAT.test(email.trim())) {
     errors.email = "L'email n'a pas un format valide";
@@ -71,9 +71,9 @@ function validateConnexion({ email, password }) {
   return errors;
 }
 
-export async function connexion(req, res) {
+export async function connection(req, res) {
   const body = req.body ?? {};
-  const errors = validateConnexion(body);
+  const errors = validateConnection(body);
   if (Object.keys(errors).length > 0) {
     throw new ErrorHttp(422, "Données invalides", errors);
   }
