@@ -10,3 +10,8 @@
     width: 40px;
     margin-bottom: var(--space-xs);
 }
+
+.header_logo.authPage {
+    width: 70px;
+    margin-bottom: var(--space-md);
+}

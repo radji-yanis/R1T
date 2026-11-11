@@ -4,7 +4,7 @@ export function handleErrors(err, req, res, next) {
   if (err instanceof ErrorHttp) {
     return res
       .status(err.status)
-      .json({ message: err.message, erreurs: err.details });
+      .json({ message: err.message, errors: err.errors });
   }
 
   if (err.type === "entity.parse.failed") {

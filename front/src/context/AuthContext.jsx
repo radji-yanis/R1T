@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import * as api from "../api/auth.js";
 
 const AuthContext = createContext(null);
@@ -8,29 +8,30 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    try {
-      const user = api.getMe();
-      setUser(user);
-    } catch {
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
+    api.getMe()
+      .then(({ user }) => setUser(user))
+      .catch(() => setUser(null))
+      .finally(() => setLoading(false));
   }, []);
 
-  async function connection(identifiers) {
+  async function login(identifiers) {
     const data = await api.connect(identifiers);
+    console.log(data);
     setUser(data.user);
   }
 
-  async function disconnection() {
+  async function logout() {
     await api.disconnect();
     setUser(null);
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, connection, disconnection }}>
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
 }

@@ -1,0 +1,18 @@
+.navTabs {
+    display: flex;
+    margin-bottom: var(--space-md);
+}
+
+.item {
+    width: 50%;
+    font-family: var(--font-title);
+    font-size: 26px;
+    text-align: center;
+    padding: var(--space-xs);
+    border-bottom: 3px solid var(--text);
+}
+
+.item.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}

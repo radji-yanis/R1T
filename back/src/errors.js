@@ -1,7 +1,7 @@
 export class ErrorHttp extends Error {
-  constructor(status, message, details) {
+  constructor(status, message, errors) {
     super(message);
     this.status = status;
-    this.details = details;
+    this.errors = errors;
   }
 }

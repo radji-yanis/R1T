@@ -1,6 +1,6 @@
 import { pool } from "../db.js";
 
-const PUBLIC_COLUMNS = "id, pseudo, email";
+const PUBLIC_COLUMNS = "id, pseudo, email, style, avatar_id";
 
 export const getById = async (id) => {
   const { rows } = await pool.query(
@@ -33,6 +33,14 @@ export async function findByEmail(email) {
   return rows[0] ?? null;
 }
 
+export async function findByPseudo(pseudo) {
+  const { rows } = await pool.query(
+    `SELECT ${PUBLIC_COLUMNS}, mot_de_passe_hash FROM utilisateur WHERE pseudo = $1`,
+    [pseudo],
+  );
+  return rows[0] ?? null;
+}
+
 export async function findById(id) {
   const { rows } = await pool.query(
     `SELECT ${PUBLIC_COLUMNS} FROM utilisateur WHERE id = $1`,
@@ -44,15 +52,13 @@ export async function findById(id) {
 export async function create({
   email,
   pseudo,
-  play_style,
-  avatar_id,
   hashedPassword,
 }) {
   const { rows } = await pool.query(
-    `INSERT INTO utilisateur (email, pseudo, style, avatar_id, mot_de_passe_hash)
-     VALUES ($1, $2, $3, $4, $5)
+    `INSERT INTO utilisateur (email, pseudo, mot_de_passe_hash)
+     VALUES ($1, $2, $3)
      RETURNING ${PUBLIC_COLUMNS}`,
-    [email, pseudo, play_style, avatar_id, hashedPassword],
+    [email, pseudo, hashedPassword],
   );
   return rows[0];
 }

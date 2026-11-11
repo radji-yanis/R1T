@@ -9,6 +9,12 @@
   --calm: #4ADE80;
   --grey: #505258;
   --white: #fff;
+  --dark-error: #2E2226;
+  --light-error:#FF9A9A;
+  --error: #F06A6A;
+  --dark-valid: #222E26;
+  --light-valid: #7BE39B;
+  --valid: #4CC37A;
   
   --font-title: 'Bebas Neue', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -24,7 +30,7 @@ body {
   background-color: var(--background);
   color: var(--text);
   font-family: var(--font-body);
-  padding: var(--space-sm);
+  padding: 22px;
 }
 
 h1, h2, h3 {
@@ -44,9 +50,18 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.h2-min {
+  font-size: 36px;
+  margin-bottom: 1rem;
+}
+
 .h3 {
   font-size: 28px;
   margin-bottom: 0.5rem;
+}
+
+.centered {
+  text-align: center;
 }
 
 p {
