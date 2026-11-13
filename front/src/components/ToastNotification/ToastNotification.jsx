@@ -62,10 +62,10 @@ export function useToast() {
 
   return {
     // toast.success("message") ajoute un toast vert avec le titre "Succès"
-    success: (message, title = "Succès") =>
+    success: ({ title = "Succès", message = null }) =>
       toastManager.add({ title: title, description: message, type: "success" }),
     // toast.error("message") ajoute un toast rouge avec le titre "Erreur"
-    error: (message, title = "Erreur") =>
+    error: ({ title = "Erreur", message = null }) =>
       toastManager.add({ title: title, description: message, type: "error" }),
   };
 }

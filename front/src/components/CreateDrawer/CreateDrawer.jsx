@@ -8,7 +8,6 @@ import AutocompleteAdress from "../../components/AutocompleteAdress/Autocomplete
 import { createRencontre } from "../../api/rencontres";
 import { useToast } from "../ToastNotification/ToastNotification";
 
-// import styles from "./CreateDrawer.module.css";
 import formStyles from "../../form.module.css";
 
 export default function CreateDrawer(props) {

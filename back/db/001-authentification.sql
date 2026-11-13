@@ -1,0 +1,1 @@
+ALTER TABLE utilisateur ALTER COLUMN mot_de_passe_hash TYPE VARCHAR(100);

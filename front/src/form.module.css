@@ -1,5 +1,5 @@
-.form .label:last-child{
-    margin-bottom: 0;
+.form *:first-child{
+    margin-top: 0;
 }
 
 .row {
@@ -11,6 +11,11 @@
     flex-grow: 1;
 }
 
+.form [type="submit"] {
+    margin-top: 2rem;
+}
+
+/* 
 .form label {
     display: flex;
     flex-direction: column;
