@@ -9,38 +9,58 @@ import { createRencontre } from "../../api/rencontres";
 import { useToast } from "../ToastNotification/ToastNotification";
 
 import formStyles from "../../form.module.css";
+import { useAuth } from '../../context/AuthContext';
+import Field from '../Field/Field';
+import { useEffect } from 'react';
 
 export default function CreateDrawer(props) {
-  const { openedDrawer, setOpenedDrawer } = props;
+  const { openedDrawer, setOpenedDrawer, setMatchCreated } = props;
+  const [ errors, setErrors ] = useState({});
+  const [ submitting, setSubmitting ] = useState(false);
 
   const [cityValue, setCityValue] = useState([]);
   const formRef = useRef(null);
   const toast = useToast();
+  const { user } = useAuth();
 
   const stickyFooter = (
-    <Button onClick={() => formRef.current && formRef.current.requestSubmit()} form="matchForm" className="btn-submit">
+    <Button onClick={() => formRef.current && formRef.current.requestSubmit()} disabled={submitting}>
       CRÉER LE MATCH
     </Button>
   );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
 
     const formData = new FormData(e.target);
-
     const data = Object.fromEntries(formData.entries());
-    data.date_heure = `${data.date} ${data.time}`;
     data.lieu = cityValue[0];
     data.longitude = Number(cityValue[1]);
     data.latitude = Number(cityValue[2]);
-    //temporaire
-    data.organisateur_id = 1;
+    data.organisateur_id = user.id;
 
-    createRencontre(data);
-
-    toast.success(`Match créé avec succès`);
-
-    setOpenedDrawer(false);
+    try {
+      await createRencontre(data);
+      toast.success({
+          title: "Création réussie",
+          message: "Rendez-vous sur le r1t ! 🔥", 
+        })
+      setErrors({});
+      setCityValue([]);
+      setMatchCreated(true);
+      setOpenedDrawer(false);
+    } catch (error) {
+      if ([400, 422].includes(error.status)) {
+        setErrors(error.errors);
+        toast.error({
+          title: "Création échouée",
+          message: "Le formulaire contient des erreurs. 😣", 
+        })
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -54,36 +74,27 @@ export default function CreateDrawer(props) {
           id="matchForm"
           className={formStyles.form}
           onSubmit={handleSubmit}
-          ref={formRef}        
+          ref={formRef} 
+          noValidate       
         >
-          <label>Titre
-            <input name="titre" type="text" placeholder="" required />
-          </label>
-
-          <label>Adresse
+          <Field id="titre" label="Titre" type="text" error={errors.titre} placeholder="Match en détente" required/>
+          <Field id="lieu" label="Adresse" error={errors.lieu}>
             <AutocompleteAdress name="lieu" required={true} cityValue={cityValue} setCityValue={setCityValue} />
-          </label>
-
-          <label>Format
+          </Field>
+          <Field id="format" label="Format" error={errors.format}>
             <CustomSelect name="format" isClassic options={[
               { label: '5 contre 5', value: 'foot5' },
               { label: '7 contre 7', value: 'foot7' },
               { label: '11 contre 11', value: 'foot11' },
             ]}/>
-          </label>
-
+          </Field>
           <div className={formStyles.row}>
-            <label>Date
-              <input name="date" type="date" placeholder="jj/mm/aaaa" min={new Date().toISOString().split('T')[0]} required />
-            </label>
-            <label>Heure
-              <input name="time" type="time" placeholder="-- : --" required />
-            </label>
+            <Field id="date" label="Date" type="date" error={errors.date} placeholder="jj/mm/aaaa" min={new Date().toISOString().split('T')[0]} required />
+            <Field id="time" label="Heure" type="time" error={errors.time} placeholder="-- : --" required />
           </div>
-
-          <label>Description
-            <textarea name="description" placeholder="" rows={3} />
-          </label>
+          <Field id="description" label="Description" error={errors.format}>
+            <textarea name="description" placeholder="Détails sur le match..." rows={3} />
+          </Field>
         </form>
       </BottomDrawer>
     </>

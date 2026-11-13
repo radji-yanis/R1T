@@ -16,7 +16,6 @@ export function AuthProvider({ children }) {
 
   async function login(identifiers) {
     const data = await api.connect(identifiers);
-    console.log(data);
     setUser(data.user);
   }
 

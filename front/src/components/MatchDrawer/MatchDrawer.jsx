@@ -41,7 +41,7 @@ export default function MatchDrawer({ openedDrawer, setOpenedDrawer, detailedMat
                 const data = await getRencontreById(detailedMatchId);
                 setDetails(data);
             } catch (error) {
-                console.log(error)
+                console.error(error)
             } finally {
                 setOpenedDrawer(true);
             }
@@ -66,10 +66,12 @@ export default function MatchDrawer({ openedDrawer, setOpenedDrawer, detailedMat
                             <span className={styles.details_format}>{cleanFormats[details.format][0]}</span>
                         </div>
                     </div>
-                    <div className={styles.details_description}>
-                        <h3 className="h3">Description</h3>
-                        <p>{details.description}</p>
-                    </div>
+                    {details.description &&
+                        <div className={styles.details_description}>
+                            <h3 className="h3">Description</h3>
+                            <p>{details.description}</p>
+                        </div>
+                    }
                     <h3 className="h3">Inscrits ({details.nb_inscrits}/{cleanFormats[details.format][1]})</h3>
                     <div className={styles.subscribed} data-base-ui-swipe-ignore style={{ touchAction: 'pan-y' }}>
                         <Swiper

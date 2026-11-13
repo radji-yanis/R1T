@@ -48,6 +48,7 @@ export async function registration(req, res) {
   });
   res.status(201).json({ user });
 }
+
 function validateConnection({ email, password }) {
   const errors = {};
   if (typeof email !== "string" || !EMAIL_FORMAT.test(email.trim())) {

@@ -91,7 +91,7 @@ export const cancelById = async (id) => {
   return rows[0] ?? null;
 };
 
-export const create = async (
+export async function create({
   titre,
   lieu,
   format,
@@ -100,7 +100,7 @@ export const create = async (
   organisateur_id,
   latitude,
   longitude,
-) => {
+}) {
   const { rows } = await pool.query(
     `INSERT INTO rencontre (titre, lieu, format, date_heure, description, organisateur_id, latitude, longitude)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)

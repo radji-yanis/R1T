@@ -4,10 +4,12 @@ import Loader from "../Loader/Loader.jsx";
 
 export default function GuestRoute({ children }) {
   const { user, loading } = useAuth();
+  const location = useLocation();
 
   if (loading) return <Loader/>;
   if (user) {
-    return <Navigate to="/" replace />;
+    const destination = location.state?.from?.pathname || "/";
+    return <Navigate to={destination} replace state={{ connected: true }} />;
   }
   return children;
 }

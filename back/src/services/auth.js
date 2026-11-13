@@ -66,7 +66,6 @@ export async function connect({ email, password }) {
     process.env.JWT_SECRET,
     { expiresIn: "2h" },
   );
-  console.log(token);
   const { mot_de_passe_hash, ...publicUser } = user;
   return [publicUser, token];
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getOrganizedMatches, getRegisteredMatches } from "../api/rencontres";
 import { useToast } from "../components/ToastNotification/ToastNotification"
+import { useAuth } from "../context/AuthContext";
 
 import Header from "../components/Header/Header";
 import Card from "../components/Card/Card";
@@ -17,15 +18,18 @@ export default function MesMatchs() {
   const [organizedMatches, setOrganizedMatches] = useState([]);
   const [registeredMatches, setRegisteredMatches] = useState([]);
   const [chargementRencontres, setChargementRencontres] = useState(true);
+  const [chargementRencontresOrganisees, setChargementRencontresOrganisees] = useState(true);
+  const [matchCreated, setMatchCreated] = useState(false);
   
   const toast = useToast();
+  const { user } = useAuth();
 
   useEffect(() => {
     async function loadMatches() {
       try {
         const [organized, registered] = await Promise.all([
-          getOrganizedMatches(1),
-          getRegisteredMatches(1),
+          getOrganizedMatches(user.id),
+          getRegisteredMatches(user.id),
         ]);
 
         setOrganizedMatches(organized);
@@ -34,22 +38,42 @@ export default function MesMatchs() {
         toast.error("Impossible de charger les matchs.");
       } finally {
         setChargementRencontres(false);
+        setChargementRencontresOrganisees(false);
       }
     }
 
     loadMatches();
   }, []);
 
+  useEffect(() => {
+    if(matchCreated) {
+      setChargementRencontresOrganisees(true);
+      
+      async function loadOrganizedMatches() {
+        try {
+          const organized = await getOrganizedMatches(user.id);
+          setOrganizedMatches(organized);
+        } catch (err) {
+          toast.error("Impossible de charger les matchs.");
+        } finally {
+          setChargementRencontresOrganisees(false);
+          setMatchCreated(false);
+        }
+      }
+      loadOrganizedMatches();
+    }
+  }, [matchCreated]);
+
   return (
     <>
       <Header titre="Mes matchs" />
       <section className="section">
         <h2 className="h2-min">J'ORGANISE</h2>
-        {chargementRencontres 
+        {chargementRencontresOrganisees 
           ? <Loader/>
           : <>
             {organizedMatches.length === 0 ? (
-              <SimpleMessage content="Aucun match organisé."/>
+              <SimpleMessage content="Aucun match organisé"/>
             ) : (
               organizedMatches.map((match) => (
                 <Card key={match.id} openedDrawer={openedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId} {...match}/>
@@ -65,7 +89,7 @@ export default function MesMatchs() {
           ? <Loader/>
           : <>
             {registeredMatches.length === 0 ? (
-              <SimpleMessage content="Aucun match rejoint."/>
+              <SimpleMessage content="Aucun match rejoint"/>
             ) : (
               registeredMatches.map((match) => (
                 <Card key={match.id} openedDrawer={openedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId} {...match}/>
@@ -75,8 +99,10 @@ export default function MesMatchs() {
         }
       </section>
       <CreateDrawer
-        setOpenedDrawer={setOpenedDrawer}
         openedDrawer={openedDrawer}
+        setOpenedDrawer={setOpenedDrawer}
+        matchCreated={matchCreated}
+        setMatchCreated={setMatchCreated}
       />
       <MatchDrawer openedDrawer={openedMatchDrawer} setOpenedDrawer={setOpenedMatchDrawer} detailedMatchId={detailedMatchId} setDetailedMatchId={setDetailedMatchId}/>
     </>

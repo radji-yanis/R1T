@@ -74,4 +74,10 @@
 
 .subscribed_pseudo {
     color: var(--light-grey);
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 6px;
+    text-align: center;
 }
