@@ -1,4 +1,7 @@
 import { useState, useEffect, useTransition } from 'react'
+import { useLocation } from "react-router";
+
+import { useToast } from "../components/ToastNotification/ToastNotification";
 
 import Header from "../components/Header/Header"
 import Card from "../components/Card/Card"
@@ -8,6 +11,7 @@ import MatchDrawer from "../components/MatchDrawer/MatchDrawer"
 import Filters from '../components/Filters/Filters';
 
 import { getRencontres } from '../api/rencontres'
+import { useAuth } from '../context/AuthContext';
 
 export default function Recherche() {
     const [rencontres, setRencontres] = useState([]);
@@ -15,6 +19,22 @@ export default function Recherche() {
     const [detailedMatchId, setDetailedMatchId] = useState(null);
     const [openedMatchDrawer, setOpenedMatchDrawer] = useState(false);
     const [filters, setFilters] = useState({});
+    
+    const toast = useToast();
+    const location = useLocation();
+    const connected = location.state?.connected ?? false;
+    const everConnected = location.state?.everConnected ?? false;
+
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if(connected) {
+            toast.success({
+                title: "Connexion réussie",
+                message: `Bienvenue à toi, ${user.pseudo} ! 🫡`, 
+            })
+        }
+    }, []);
 
     useEffect(() => {
         if(Object.keys(filters).length === 0) return;
