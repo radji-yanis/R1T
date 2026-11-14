@@ -24,6 +24,8 @@
   --space-md: 2rem;    /* 32px */
   --space-lg: 4rem;    /* 64px */
   --space-xl: 8rem;    /* 128px */
+
+  --navbar-height: 90px;
 }
 
 body {

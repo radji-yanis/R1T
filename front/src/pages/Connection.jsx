@@ -40,8 +40,8 @@ export default function Connection() {
         const formData = new FormData(e.target);
         const userData = Object.fromEntries(formData.entries());
         try {
-            const { user } = await login(userData);
-            navigate(from, { state: { connected: true } });
+            await login(userData);
+            // navigate(from, { state: { connected: true } });
         } catch (error) {
             if ([401, 422].includes(error.status)) {
                 setErrors(error.errors);

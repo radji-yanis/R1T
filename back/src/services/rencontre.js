@@ -1,4 +1,5 @@
 import * as rencontreModel from "../models/rencontre.js";
+import * as inscriptionModel from "../models/inscription.js";
 import { httpError } from "../utils/httpError.js";
 
 const validFormats = ["foot5", "foot7", "foot11"];
@@ -97,60 +98,10 @@ export const cancelById = async (id) => {
   return rencontre;
 };
 
-export const create = async (
-  titre,
-  lieu,
-  format,
-  date_heure,
-  description,
-  organisateur_id,
-  latitude,
-  longitude,
-) => {
-  const lat = Number(latitude);
-  const lng = Number(longitude);
-
-  if (titre.trim().length < 3) {
-    throw httpError(
-      400,
-      "Title is required and must be at least 3 characters long.",
-    );
-  }
-
-  if (!lieu.trim()) {
-    throw httpError(400, "Location is required.");
-  }
-
-  if (!validFormats.includes(format)) {
-    throw httpError(400, "Invalid format. Accepted values: 5v5, 7v7, 11v11.");
-  }
-
-  if (Number.isNaN(Date.parse(date_heure))) {
-    throw httpError(400, "Invalid date or time.");
-  }
-
-  if (!Number.isInteger(Number(organisateur_id))) {
-    throw httpError(400, "Organizer ID must be a valid integer.");
-  }
-
-  if (Number.isNaN(lat) || lat < -90 || lat > 90) {
-    throw httpError(400, "Invalid latitude. Must be between -90 and 90.");
-  }
-
-  if (Number.isNaN(lng) || lng < -180 || lng > 180) {
-    throw httpError(400, "Invalid longitude. Must be between -180 and 180.");
-  }
-
-  return rencontreModel.create(
-    titre.trim(),
-    lieu.trim(),
-    format,
-    date_heure,
-    description || null,
-    organisateur_id,
-    lat,
-    lng,
-  );
+export async function create(data) {
+  const rencontre = await rencontreModel.create(data);
+  await inscriptionModel.addUserInMatch(rencontre.organisateur_id, rencontre.id);
+  return rencontre;
 };
 
 export const getOrganizedByUserId = async (userId) => {

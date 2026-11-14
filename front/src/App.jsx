@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router";
-import Navbar from "./components/Navbar/Navbar.jsx";
 
 import Recherche from "./pages/Recherche.jsx";
 import Test from "./pages/Test.jsx";
@@ -21,8 +20,6 @@ function App() {
       <Route path="/inscription" element={<GuestRoute><Registration /></GuestRoute>} />
       <Route path="/connexion" element={<GuestRoute><Connection /></GuestRoute>} />
     </Routes>
-
-    <Navbar />
   </>
   );
 }

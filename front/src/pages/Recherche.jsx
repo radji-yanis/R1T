@@ -23,7 +23,6 @@ export default function Recherche() {
     const toast = useToast();
     const location = useLocation();
     const connected = location.state?.connected ?? false;
-    const everConnected = location.state?.everConnected ?? false;
 
     const { user } = useAuth();
 

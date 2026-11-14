@@ -4,35 +4,20 @@ import Profile from '../components/Profile/Profile';
 import Button from '../components/Button/Button';
 import Loader from '../components/Loader/Loader';
 import { getUserById } from '../api/utilisateurs';
+import { useAuth } from '../context/AuthContext';
 
 export default function MonProfil() {
-    const [userProfile, setUserProfile] = useState(null);
-    const [loadingProfile, setLoadingProfile] = useState(true);
-
-    useEffect(() => {
-
-        (async () => {
-            try {
-                const data = await getUserById(1);
-        console.log(data);
-                setUserProfile(data);
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setLoadingProfile(false);
-            }
-        })();
-    }, [])
+    const { user, loading, logout } = useAuth();
 
     return (
         <>
             <Header titre="Mon profil"/>
-            {loadingProfile ? 
+            {loading ? 
                 <Loader/> :
                 <>
-                    <Profile userProfile={userProfile}/>
+                    <Profile userProfile={user}/>
                     <Button style={{ marginBottom: "var(--space-sm)" }}>Modifier le profil</Button>
-                    <Button isSecondary>Déconnexion</Button>
+                    <Button onClick={logout} isSecondary>Déconnexion</Button>
                 </>
             }
         </>

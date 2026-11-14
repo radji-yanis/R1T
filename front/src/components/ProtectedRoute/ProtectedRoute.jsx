@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from 'react-router';
 import { useAuth } from '../../context/AuthContext.jsx';
 import Loader from "../Loader/Loader.jsx";
+import Navbar from "../Navbar/Navbar.jsx";
 
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -10,5 +11,8 @@ export default function ProtectedRoute({ children }) {
   if (!user) {
     return <Navigate to="/connexion" replace state={{ from: location.pathname }} />;
   }
-  return children;
+  return <div style={{ paddingBottom: "var(--navbar-height)" }}>
+    {children}
+    <Navbar />
+  </div>;
 }

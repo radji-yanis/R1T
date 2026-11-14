@@ -11,8 +11,10 @@ export default function Profile ({ userProfile }) {
                 <div>
                     <h3>Email</h3>
                     <p>{userProfile.email}</p>
-                    <h3>Style de jeu</h3>
-                    <p>{userProfile.style}</p>
+                    {userProfile.style && <>
+                        <h3>Style de jeu</h3>
+                        <p>{userProfile.style}</p>
+                    </>}
                 </div>
             </div>
         </>
