@@ -43,9 +43,11 @@
   margin-bottom: calc(-1 * var(--bleed));
   /* padding: 1rem 1.5rem; */
   padding: 1rem 0;
-  padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom, 0px) + var(--bleed));
+  padding-bottom: calc(
+    var(--space-md) + env(safe-area-inset-bottom, 0px) + var(--bleed)
+  );
   border-top: 1px solid var(--grey);
-  background-color:  var(--background);
+  background-color: var(--background);
   color: var(--text);
   outline: 0;
   box-shadow: 0.25rem 0.25rem 0 rgb(0 0 0 / 12%);

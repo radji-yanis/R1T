@@ -1,19 +1,19 @@
-.form > *:first-child{
-    margin-top: 0;
+.form > *:first-child {
+  margin-top: 0;
 }
 
 .row {
-    display: flex;
-    gap: var(--space-xs);
+  display: flex;
+  gap: var(--space-xs);
 }
 
 .row > div {
-    flex: 1;
-    min-width: 0;
+  flex: 1;
+  min-width: 0;
 }
 
-.form [type="submit"] {
-    margin-top: 2rem;
+.form [type='submit'] {
+  margin-top: 2rem;
 }
 
 /* 

@@ -23,7 +23,7 @@
   background-size: 20px 20px;
 
   &::placeholder {
-      color: var(--light-grey);
+    color: var(--light-grey);
   }
 }
 
@@ -57,8 +57,9 @@
   left: -50px;
   width: 50px;
   background-image: linear-gradient(
-      to right, 
-      color-mix(in srgb, var(--dark-grey) 0%, transparent) 0%, var(--dark-grey) 100%
+    to right,
+    color-mix(in srgb, var(--dark-grey) 0%, transparent) 0%,
+    var(--dark-grey) 100%
   );
 }
 
@@ -83,7 +84,7 @@
   font-size: 22px;
   font-weight: 400;
   appearance: none;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik03IDEwbDUgNSA1LTV6Ii8+PC9zdmc+");
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik03IDEwbDUgNSA1LTV6Ii8+PC9zdmc+');
   background-repeat: no-repeat;
   background-position: right 4px center;
   background-size: 18px;
