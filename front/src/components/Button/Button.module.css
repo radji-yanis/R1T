@@ -1,21 +1,21 @@
 .button {
-    height: 60px;
-    font-family: var(--font-title);
-    font-size: 36px;
-    color: var(--background);
-    background: var(--primary);
-    width: 100%;
-    border-radius: 12px;
-    padding-top: 4px;
+  height: 60px;
+  font-family: var(--font-title);
+  font-size: 36px;
+  color: var(--background);
+  background: var(--primary);
+  width: 100%;
+  border-radius: 12px;
+  padding-top: 4px;
 }
 
 .button.secondary {
-    background-color: var(--background);
-    border: 2px solid #fff;
-    color: #fff;
+  background-color: var(--background);
+  border: 2px solid #fff;
+  color: #fff;
 }
 
 .button[disabled] {
-    opacity: 0.5;
-    pointer-events: none;
+  opacity: 0.5;
+  pointer-events: none;
 }

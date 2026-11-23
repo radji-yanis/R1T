@@ -1,29 +1,29 @@
 :root {
-  --primary: #FF5500;
-  --text: #9CA3AF;
+  --primary: #ff5500;
+  --text: #9ca3af;
   --dark-grey: #353439;
-  --light-grey: #D2D2D2;
+  --light-grey: #d2d2d2;
   --placeholder: #656565;
   --background: #222126;
-  --danger: #FF5500;
-  --calm: #4ADE80;
+  --danger: #ff5500;
+  --calm: #4ade80;
   --grey: #505258;
   --white: #fff;
-  --dark-error: #2E2226;
-  --light-error:#FF9A9A;
-  --error: #F06A6A;
-  --dark-valid: #222E26;
-  --light-valid: #7BE39B;
-  --valid: #4CC37A;
-  
+  --dark-error: #2e2226;
+  --light-error: #ff9a9a;
+  --error: #f06a6a;
+  --dark-valid: #222e26;
+  --light-valid: #7be39b;
+  --valid: #4cc37a;
+
   --font-title: 'Bebas Neue', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  --space-xs: 0.5rem;  /* 8px */
-  --space-sm: 1rem;    /* 16px */
-  --space-md: 2rem;    /* 32px */
-  --space-lg: 4rem;    /* 64px */
-  --space-xl: 8rem;    /* 128px */
+  --space-xs: 0.5rem; /* 8px */
+  --space-sm: 1rem; /* 16px */
+  --space-md: 2rem; /* 32px */
+  --space-lg: 4rem; /* 64px */
+  --space-xl: 8rem; /* 128px */
 
   --navbar-height: 90px;
 }
@@ -35,7 +35,9 @@ body {
   padding: 22px;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-title);
   font-weight: 400;
   line-height: 100%;

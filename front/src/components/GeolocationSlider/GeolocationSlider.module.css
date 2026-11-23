@@ -35,14 +35,14 @@
 }
 
 .Value {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-weight: 600;
-    color: var(--light-grey);
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-weight: 600;
+  color: var(--light-grey);
 }
 
 .Value::after {
-    content: 'km';
-    display: inline;
+  content: 'km';
+  display: inline;
 }

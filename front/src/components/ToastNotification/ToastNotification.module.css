@@ -57,7 +57,8 @@
     scale(var(--scale));
 
   &[data-expanded] {
-    transform: translateX(var(--toast-swipe-movement-x)) translateY(var(--offset-y));
+    transform: translateX(var(--toast-swipe-movement-x))
+      translateY(var(--offset-y));
     height: var(--toast-height);
   }
 
@@ -77,10 +78,12 @@
       transform: translateY(calc(var(--toast-swipe-movement-y) - 150%));
     }
     &[data-swipe-direction='left'] {
-      transform: translateX(calc(var(--toast-swipe-movement-x) - 150%)) translateY(var(--offset-y));
+      transform: translateX(calc(var(--toast-swipe-movement-x) - 150%))
+        translateY(var(--offset-y));
     }
     &[data-swipe-direction='right'] {
-      transform: translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(var(--offset-y));
+      transform: translateX(calc(var(--toast-swipe-movement-x) + 150%))
+        translateY(var(--offset-y));
     }
     &[data-swipe-direction='down'] {
       transform: translateY(calc(var(--toast-swipe-movement-y) + 150%));
@@ -145,7 +148,7 @@
 }
 
 .Title::before {
-  content: "";
+  content: '';
   flex: none;
   width: 20px;
   height: 20px;

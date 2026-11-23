@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState, useContext } from "react";
-import * as api from "../api/auth.js";
+import { createContext, useEffect, useState, useContext } from 'react';
+import * as api from '../api/auth.js';
 
 const AuthContext = createContext(null);
 
@@ -8,7 +8,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.getMe()
+    api
+      .getMe()
       .then(({ user }) => setUser(user))
       .catch(() => setUser(null))
       .finally(() => setLoading(false));

@@ -108,7 +108,7 @@
 .Item {
   box-sizing: border-box;
   outline: 0;
-  padding:  12px var(--space-sm) 12px var(--space-xs);
+  padding: 12px var(--space-sm) 12px var(--space-xs);
   font-size: 18px;
   font-weight: 500;
   line-height: 1rem;

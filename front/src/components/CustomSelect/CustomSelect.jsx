@@ -1,11 +1,23 @@
 import { Select } from '@base-ui/react/select';
 import styles from './CustomSelect.module.css';
 
-export default function CustomSelect({name = "", isClassic = false, options, onChange}) {
+export default function CustomSelect({
+  name = '',
+  isClassic = false,
+  options,
+  onChange,
+}) {
   return (
     <div className={styles.Field}>
-      <Select.Root name={name} items={options} defaultValue={options[0].value} onValueChange={onChange}>
-        <Select.Trigger className={`${styles.Select} ${isClassic ? styles.classic : ""}`}>
+      <Select.Root
+        name={name}
+        items={options}
+        defaultValue={options[0].value}
+        onValueChange={onChange}
+      >
+        <Select.Trigger
+          className={`${styles.Select} ${isClassic ? styles.classic : ''}`}
+        >
           <Select.Value className={styles.Value} />
           <Select.Icon>
             <CaretUpDownIcon />
@@ -19,11 +31,17 @@ export default function CustomSelect({name = "", isClassic = false, options, onC
               </Select.ScrollUpArrow>
               <Select.List className={styles.List}>
                 {options.map(({ label, value }) => (
-                  <Select.Item key={label} value={value} className={styles.Item}>
+                  <Select.Item
+                    key={label}
+                    value={value}
+                    className={styles.Item}
+                  >
                     <Select.ItemIndicator className={styles.ItemIndicator}>
                       <CheckIcon />
                     </Select.ItemIndicator>
-                    <Select.ItemText className={styles.ItemText}>{label}</Select.ItemText>
+                    <Select.ItemText className={styles.ItemText}>
+                      {label}
+                    </Select.ItemText>
                   </Select.Item>
                 ))}
               </Select.List>
