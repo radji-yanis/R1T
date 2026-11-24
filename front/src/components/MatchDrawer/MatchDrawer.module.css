@@ -65,11 +65,17 @@
   background: var(--primary);
   border-radius: 50%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   font-family: var(--font-title);
   color: #fff;
   font-size: 20px;
+  overflow: hidden;
+}
+
+.subscribed_avatar img {
+  transform: translateY(5%);
+  height: 95%;
 }
 
 .subscribed_pseudo {

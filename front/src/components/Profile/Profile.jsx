@@ -4,7 +4,12 @@ export default function Profile({ userProfile }) {
   return (
     <>
       <div className={styles.profile}>
-        <div className={styles.avatar}>{userProfile.avatar_id}</div>
+        <div className={styles.avatar}>
+          <img
+            src={`/avatars_sans_fond/${userProfile.avatar_id}.png`}
+            alt="Avatar"
+          />
+        </div>
         <h2 className={styles.pseudo}>{userProfile.pseudo}</h2>
         <div>
           <h3>Email</h3>

@@ -11,7 +11,7 @@ INSERT INTO utilisateur (email, mot_de_passe_hash, pseudo, style, avatar_id) VAL
   ('leo.p@exemple.fr',      '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Léo P.',      'renard_surfaces', 5),
   ('maelle.r@exemple.fr',   '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Maëlle R.',   'magicien',        27),
   ('amine.h@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Amine H.',    'muraille',        9),
-  ('ines.t@exemple.fr',     '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Inès T.',     'artificier',      30),
+  ('ines.t@exemple.fr',     '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Inès T.',     'artificier',      25),
   ('lucas.v@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Lucas V.',    'dernier_rempart', 14),
   ('nadia.b@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Nadia B.',    'magicien',        25),
   ('hugo.l@exemple.fr',     '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Hugo L.',     'renard_surfaces', 1),
@@ -32,7 +32,7 @@ INSERT INTO utilisateur (email, mot_de_passe_hash, pseudo, style, avatar_id) VAL
   ('bilal.m@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Bilal M.',    'renard_surfaces', 24),
   ('clara.h@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Clara H.',    'muraille',        26),
   ('dylan.v@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Dylan V.',    'artificier',      28),
-  ('emma.s@exemple.fr',     '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Emma S.',     'magicien',        29),
+  ('emma.s@exemple.fr',     '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Emma S.',     'magicien',        22),
   ('farid.n@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Farid N.',    'dernier_rempart', 3),
   ('gaelle.a@exemple.fr',   '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Gaëlle A.',   'renard_surfaces', 5),
   ('hamza.d@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Hamza D.',    'muraille',        7),
@@ -43,7 +43,7 @@ INSERT INTO utilisateur (email, mot_de_passe_hash, pseudo, style, avatar_id) VAL
   ('melissa.g@exemple.fr',  '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Mélissa G.',  'muraille',        22),
   ('nolan.c@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Nolan C.',    'artificier',      25),
   ('oceane.p@exemple.fr',   '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Océane P.',   'magicien',        27),
-  ('paul.t@exemple.fr',     '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Paul T.',     'dernier_rempart', 30),
+  ('paul.t@exemple.fr',     '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Paul T.',     'dernier_rempart', 28),
   ('quentin.l@exemple.fr',  '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Quentin L.',  'renard_surfaces', 1),
   ('rania.m@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Rania M.',    'muraille',        4),
   ('sacha.h@exemple.fr',    '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Sacha H.',    'artificier',      8),
@@ -52,7 +52,7 @@ INSERT INTO utilisateur (email, mot_de_passe_hash, pseudo, style, avatar_id) VAL
   ('victor.s@exemple.fr',   '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Victor S.',   'renard_surfaces', 20),
   ('wassim.n@exemple.fr',   '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Wassim N.',   'muraille',        24),
   ('yasmine.a@exemple.fr',  '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Yasmine A.',  'artificier',      26),
-  ('zakaria.d@exemple.fr',  '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Zakaria D.',  'magicien',        29);
+  ('zakaria.d@exemple.fr',  '$2b$10$fDoWU9LiPbfx4PzrMhilselPnv1EF29OonVBCX3.RhEQaunt4028u', 'Zakaria D.',  'magicien',        25);
 
 -- 28 matchs (ids 1 à 28). Dates relatives au jour du seed, avec des horaires fixes.
 -- Format : date_trunc('day', now()) + interval 'N days H hours M minutes'
