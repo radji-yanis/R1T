@@ -1,11 +1,8 @@
 import * as inscriptionService from "../services/inscription.js";
 
 export const addUserInMatch = async (req, res, next) => {
-  const { utilisateur_id } = req.body;
-  const { id: rencontre_id } = req.params;
-
   try {
-    await inscriptionService.addUserInMatch(utilisateur_id, rencontre_id);
+    await inscriptionService.addUserInMatch(req.user.id, req.params.id);
     res.status(201).json({ message: "Registration confirmed" });
   } catch (err) {
     if (err.code === "23505") {
@@ -16,11 +13,8 @@ export const addUserInMatch = async (req, res, next) => {
 };
 
 export const getMatchsByUserId = async (req, res, next) => {
-  const { id: utilisateur_id } = req.params;
-
   try {
-    const rencontres =
-      await inscriptionService.getMatchsByUserId(utilisateur_id);
+    const rencontres = await inscriptionService.getMatchsByUserId(req.user.id);
     res.status(200).json(rencontres);
   } catch (err) {
     next(err);
