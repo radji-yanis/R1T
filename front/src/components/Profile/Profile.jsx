@@ -5,7 +5,7 @@ export default function Profile ({ userProfile }) {
         <> 
             <div className={styles.profile}>
                 <div className={styles.avatar}>
-                    {userProfile.avatar_id}
+                    <img src={`/avatars_sans_fond/${userProfile.avatar_id}.png`} alt="Avatar" />
                 </div>
                 <h2 className={styles.pseudo}>{userProfile.pseudo}</h2>       
                 <div>

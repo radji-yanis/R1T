@@ -15,6 +15,12 @@
     margin: auto;
     margin-bottom: var(--space-sm);
     color: var(--white);
+    overflow: hidden;
+}
+
+.avatar img {
+    height: 95%;
+    transform: translateY(5%);
 }
 
 .pseudo {

@@ -89,7 +89,7 @@ export default function MatchDrawer({ openedDrawer, setOpenedDrawer, detailedMat
                             { details.inscrits.map(inscrit => 
                                 <SwiperSlide key={inscrit.id} className={styles.subscribed_card}>
                                     <div className={styles.subscribed_avatar}>
-                                        {inscrit.avatar_id}
+                                        <img src={`/avatars_sans_fond/${inscrit.avatar_id}.png`} alt="Avatar" /> 
                                     </div>
                                     <span className={styles.subscribed_pseudo}>{inscrit.pseudo}</span>
                                 </SwiperSlide>

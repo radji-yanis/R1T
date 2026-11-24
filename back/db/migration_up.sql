@@ -9,7 +9,7 @@ CREATE TABLE utilisateur (
   mot_de_passe_hash VARCHAR(255) NOT NULL,
   pseudo VARCHAR(20) NOT NULL UNIQUE,
   style style_jeu,
-  avatar_id INTEGER NOT NULL DEFAULT 1 CHECK (avatar_id BETWEEN 1 AND 30),
+  avatar_id INTEGER NOT NULL DEFAULT 1 CHECK (avatar_id BETWEEN 1 AND 28),
   date_creation TIMESTAMP NOT NULL DEFAULT now()
 );
 
