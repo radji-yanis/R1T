@@ -1,8 +1,8 @@
-import { NavLink } from "react-router";
-import rechercheIcon from "../assets/Recherche.svg";
-import matchsIcon from "../assets/Matchs.svg";
-import profilIcon from "../assets/Profil.svg";
-import styles from "./Navbar.module.css";
+import { NavLink } from 'react-router';
+import rechercheIcon from '../assets/Recherche.svg';
+import matchsIcon from '../assets/Matchs.svg';
+import profilIcon from '../assets/Profil.svg';
+import styles from './Navbar.module.css';
 
 function Navbar() {
   return (
@@ -11,7 +11,7 @@ function Navbar() {
         to="/"
         end
         className={({ isActive }) =>
-          `${styles.navbarItem} ${isActive ? styles.active : ""}`
+          `${styles.navbarItem} ${isActive ? styles.active : ''}`
         }
       >
         <img src={rechercheIcon} alt="" />
@@ -21,7 +21,7 @@ function Navbar() {
       <NavLink
         to="/mes-matchs"
         className={({ isActive }) =>
-          `${styles.navbarItem} ${isActive ? styles.active : ""}`
+          `${styles.navbarItem} ${isActive ? styles.active : ''}`
         }
       >
         <img src={matchsIcon} alt="" />
@@ -31,7 +31,7 @@ function Navbar() {
       <NavLink
         to="/mon-profil"
         className={({ isActive }) =>
-          `${styles.navbarItem} ${isActive ? styles.active : ""}`
+          `${styles.navbarItem} ${isActive ? styles.active : ''}`
         }
       >
         <img src={profilIcon} alt="" />

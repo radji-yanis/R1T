@@ -1,7 +1,7 @@
 // On importe les pièces de la bibliothèque pour fabriquer des toasts
-import { Toast } from "@base-ui/react/toast";
+import { Toast } from '@base-ui/react/toast';
 // On importe le fichier CSS : styles.Toast, styles.Close, etc. sont ses classes
-import styles from "./ToastNotification.module.css";
+import styles from './ToastNotification.module.css';
 
 // Ce composant se place autour de toute l'application (dans main.jsx)
 // "children" est tout ce qu'il entoure, donc ton application
@@ -29,7 +29,7 @@ function ToastList() {
   const { toasts } = Toast.useToastManager();
 
   // Pour chaque toast de la liste, on dessine une carte
-  return toasts.map((toast) => (
+  return toasts.map(toast => (
     <Toast.Root
       // La key permet à React de reconnaître chaque toast
       key={toast.id}
@@ -62,10 +62,10 @@ export function useToast() {
 
   return {
     // toast.success("message") ajoute un toast vert avec le titre "Succès"
-    success: ({ title = "Succès", message = null }) =>
-      toastManager.add({ title: title, description: message, type: "success" }),
+    success: ({ title = 'Succès', message = null }) =>
+      toastManager.add({ title: title, description: message, type: 'success' }),
     // toast.error("message") ajoute un toast rouge avec le titre "Erreur"
-    error: ({ title = "Erreur", message = null }) =>
-      toastManager.add({ title: title, description: message, type: "error" }),
+    error: ({ title = 'Erreur', message = null }) =>
+      toastManager.add({ title: title, description: message, type: 'error' }),
   };
 }

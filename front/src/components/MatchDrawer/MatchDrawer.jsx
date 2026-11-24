@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 
-import BottomDrawer from "../BottomDrawer/BottomDrawer";
-import Button from "../Button/Button";
-import { useToast } from "../ToastNotification/ToastNotification"
+import BottomDrawer from '../BottomDrawer/BottomDrawer';
+import Button from '../Button/Button';
+import { useToast } from '../ToastNotification/ToastNotification';
 
 import { formatDate } from '../../utils';
 
@@ -12,41 +12,69 @@ import { getRencontreById } from '../../api/rencontres';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import styles from "./MatchDrawer.module.css";
+import styles from './MatchDrawer.module.css';
 
 const cleanFormats = {
-    "foot5": [ <>5<span className={styles.card_versus}>v</span>5</>, 10 ],
-    "foot7": [ <>7<span className={styles.card_versus}>v</span>7</>, 14 ],
-    "foot11": [ <>11<span className={styles.card_versus}>v</span>11</>, 22 ]
-}
+  foot5: [
+    <>
+      5<span className={styles.card_versus}>v</span>5
+    </>,
+    10,
+  ],
+  foot7: [
+    <>
+      7<span className={styles.card_versus}>v</span>7
+    </>,
+    14,
+  ],
+  foot11: [
+    <>
+      11<span className={styles.card_versus}>v</span>11
+    </>,
+    22,
+  ],
+};
 
-export default function MatchDrawer({ openedDrawer, setOpenedDrawer, detailedMatchId, setDetailedMatchId }) {
-    
-    const [details, setDetails] = useState(false);
-    const toast = useToast();
+export default function MatchDrawer({
+  openedDrawer,
+  setOpenedDrawer,
+  detailedMatchId,
+  setDetailedMatchId,
+}) {
+  const [details, setDetails] = useState(false);
+  const toast = useToast();
 
-    const stickyFooter = (
-        <Button onClick={() => toast.success(
-            `inscription au match ${detailedMatchId} (fake)`, 
-            "Inscription confirmée"
-        )}>Inscription</Button>
-    )
+  const stickyFooter = (
+    <Button
+      onClick={() =>
+        toast.success(
+          `inscription au match ${detailedMatchId} (fake)`,
+          'Inscription confirmée'
+        )
+      }
+    >
+      Inscription
+    </Button>
+  );
 
-    useEffect(() => {
-        if(detailedMatchId === null)
-            return;
+  useEffect(() => {
+    if (detailedMatchId === null) return;
 
-        (async () => {
-            try {
-                const data = await getRencontreById(detailedMatchId);
-                setDetails(data);
-            } catch (error) {
-                console.error(error)
-            } finally {
-                setOpenedDrawer(true);
-            }
-        })()
-    }, [detailedMatchId]);
+    (async () => {
+      try {
+        const data = await getRencontreById(detailedMatchId);
+        setDetails(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setOpenedDrawer(true);
+      }
+    })();
+  }, [detailedMatchId]);
+
+  useEffect(() => {
+    if (!openedDrawer && detailedMatchId !== null) setDetailedMatchId(null);
+  }, [openedDrawer]);
 
     useEffect(() => {
         if(!openedDrawer && detailedMatchId !== null)

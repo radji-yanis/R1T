@@ -1,6 +1,6 @@
 .profile {
-    text-align: center;
-    margin-bottom: var(--space-md);
+  text-align: center;
+  margin-bottom: var(--space-md);
 }
 
 .avatar {
@@ -24,6 +24,6 @@
 }
 
 .pseudo {
-    font-size: 48px;
-    margin-bottom: var(--space-sm);
+  font-size: 48px;
+  margin-bottom: var(--space-sm);
 }

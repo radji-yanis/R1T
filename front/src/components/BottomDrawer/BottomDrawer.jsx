@@ -2,7 +2,7 @@ import { Drawer } from '@base-ui/react/drawer';
 import styles from './BottomDrawer.module.css';
 
 export default function BottomDrawer(props) {
-  const {children, open, setOpen, stickyFooter = null} = props;
+  const { children, open, setOpen, stickyFooter = null } = props;
 
   return (
     <Drawer.Root open={open} onOpenChange={setOpen}>
@@ -16,14 +16,12 @@ export default function BottomDrawer(props) {
             </div>
             <Drawer.Content className={styles.Scroll}>
               {children}
-            </Drawer.Content> 
-            { stickyFooter &&
+            </Drawer.Content>
+            {stickyFooter && (
               <div className={styles.FooterSlot}>
-                <div className={styles.StickyFooter}>
-                  {stickyFooter}
-                </div>
+                <div className={styles.StickyFooter}>{stickyFooter}</div>
               </div>
-            }
+            )}
           </Drawer.Popup>
         </Drawer.Viewport>
       </Drawer.Portal>

@@ -3,7 +3,9 @@
    ========================================================================== */
 
 /* 1. Box sizing global et retrait des marges/paddings par défaut */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -26,14 +28,23 @@ body {
 }
 
 /* 4. Amélioration du rendu des médias (évite les débordements) */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
 /* 5. Uniformisation des éléments textuels et listes */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
@@ -41,7 +52,8 @@ p {
   text-wrap: pretty;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -51,14 +63,18 @@ a {
 }
 
 /* 6. Reset des éléments de formulaire pour plus de flexibilité */
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
   color: inherit;
   background: none;
   border: none;
 }
 
-button, select {
+button,
+select {
   cursor: pointer;
 }
 
@@ -69,10 +85,12 @@ textarea {
 /* 7. Accessibilité : Respect du choix de l'utilisateur concernant les animations */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
-   scroll-behavior: auto;
+    scroll-behavior: auto;
   }
-  
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
